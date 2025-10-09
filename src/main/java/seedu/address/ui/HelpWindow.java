@@ -1,102 +1,90 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for a help page that shows Markdown content.
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final String AVAILABLECOMMANDSPATH = "/docs/AvailableCommands.md";
 
     @FXML
-    private Button copyButton;
-
-    @FXML
-    private Label helpMessage;
+    private WebView helpContent;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a HelpWindow using the given Stage as the root.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root The Stage to use as the root of the HelpWindow.
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        loadMarkdownFile();
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a HelpWindow with a new Stage.
      */
     public HelpWindow() {
         this(new Stage());
     }
 
     /**
+     * Loads the Available Commands Markdown file into the WebView.
+     * If the file is not found or an error occurs, an error message is displayed.
+     */
+    private void loadMarkdownFile() {
+        try (InputStream input = getClass().getResourceAsStream(AVAILABLECOMMANDSPATH)) {
+            if (input == null) {
+                helpContent.getEngine().loadContent("<p>Available Commands file not found</p>");
+                return;
+            }
+
+            String markdown = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
+            Parser parser = Parser.builder().build();
+            HtmlRenderer renderer = HtmlRenderer.builder().build();
+            Node document = parser.parse(markdown);
+            String html = renderer.render(document);
+
+            helpContent.getEngine().loadContent(html);
+        } catch (IOException e) {
+            helpContent.getEngine().loadContent("<p>Error loading Available Commands file.</p>");
+        }
+    }
+
+    /**
      * Shows the help window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing help page.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
-    /**
-     * Returns true if the help window is currently being shown.
-     */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
-    /**
-     * Hides the help window.
-     */
     public void hide() {
         getRoot().hide();
     }
 
-    /**
-     * Focuses on the help window.
-     */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
     }
 }

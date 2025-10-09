@@ -292,7 +292,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * juggle between patient's contact details, medical history, appointments
 * needs to track follow-up appointments, medication schedules
 
-**Value proposition**: 
+**Value proposition**:
 
 Helps independent doctors manager their patients and schedule more efficiently using a keyboard-focused UI.
 It is optimised for more tech-savvy doctors who prefer using a CLI.

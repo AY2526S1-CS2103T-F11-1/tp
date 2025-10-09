@@ -5,7 +5,7 @@
 
 * HealthNote helps independent doctors manage their patients and schedule more efficiently using a keyboard focused UI.
 * It is optimised for more tech savvy doctors who prefer using a CLI.
-* Enables quick retrieval of patient’s records, especially useful when they are always on the move. 
+* Enables quick retrieval of patient’s records, especially useful when they are always on the move.
 
 ##### Acknowledgements
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

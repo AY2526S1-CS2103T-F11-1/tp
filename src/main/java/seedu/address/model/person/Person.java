@@ -24,19 +24,23 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final SmokingRecord smokingRecord;
+    private final BloodType bloodType;
+    private final DateOfBirth dateOfBirth;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SmokingRecord smokingRecord) {
-        requireAllNonNull(name, phone, email, address, tags, smokingRecord);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, DateOfBirth dateOfBirth,
+                  BloodType bloodType) {
+        requireAllNonNull(name, phone, email, address, tags, dateOfBirth, bloodType);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.smokingRecord = smokingRecord;
+        this.dateOfBirth = dateOfBirth;
+        this.bloodType = bloodType;
     }
 
     public Name getName() {
@@ -55,16 +59,20 @@ public class Person {
         return address;
     }
 
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    public SmokingRecord getSmokingRecord() {
-        return smokingRecord;
     }
 
     /**
@@ -101,13 +109,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && smokingRecord.equals(otherPerson.smokingRecord);
+                && dateOfBirth.equals(otherPerson.dateOfBirth)
+                && bloodType.equals(otherPerson.bloodType);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, smokingRecord);
+        return Objects.hash(name, phone, email, address, tags, dateOfBirth, bloodType);
     }
 
     @Override
@@ -118,7 +127,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("smokingRecord", smokingRecord)
+                .add("dateOfBirth", dateOfBirth)
+                .add("bloodType", bloodType)
                 .toString();
     }
 
