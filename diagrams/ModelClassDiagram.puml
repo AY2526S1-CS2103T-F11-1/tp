@@ -23,6 +23,8 @@ Class BloodType
 Class Gender
 Class Allergy
 Class Medicine
+Class AlcoholicRecord
+Class SmokingRecord
 
 Class I #FFFFFF
 }
@@ -50,6 +52,8 @@ Person *--> BloodType
 Person *--> Gender
 Person *--> "*" Medicine
 Person *--> "*" Allergy
+Person *--> AlcoholicRecord
+Person *--> SmokingRecord
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
