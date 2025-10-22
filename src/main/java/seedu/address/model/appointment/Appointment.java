@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.person.IdentityNumber;
-import seedu.address.model.person.Person;
 
 /**
  * Represents an appointment with a specific patient at a specific date and time, along with associated notes.
