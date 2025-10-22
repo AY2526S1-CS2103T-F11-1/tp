@@ -11,12 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class AppointmentNotes {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Notes can contain any characters, and it should not be blank";
-
-    /*
-     * Notes must not be blank.
-     */
-    public static final String VALIDATION_REGEX = ".+";
+            "Notes can contain any characters, and it can be blank";
 
     public final String fullNotes;
 
@@ -26,16 +21,16 @@ public class AppointmentNotes {
      * @param notes A valid notes string.
      */
     public AppointmentNotes(String notes) {
-        requireNonNull(notes);
+        notes = notes == null ? "" : notes;
         checkArgument(isValidNotes(notes), MESSAGE_CONSTRAINTS);
         fullNotes = notes;
     }
 
     /**
-     * Returns true if a given string is valid notes.
+     * Always returns true.
      */
     public static boolean isValidNotes(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return true;
     }
 
     @Override
