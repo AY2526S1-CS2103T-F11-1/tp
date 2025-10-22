@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,5 +31,16 @@ public class AddressBookBuilder {
 
     public AddressBook build() {
         return addressBook;
+    }
+
+    /**
+     * Adds the specified {@code Appointment} to the {@code AddressBook} being built.
+     *
+     * @param appointment The {@code Appointment} to be added. Must not be null.
+     * @return The current {@code AddressBookBuilder} instance, allowing for method chaining.
+     */
+    public AddressBookBuilder withAppointment(Appointment appointment) {
+        addressBook.addAppointment(appointment);
+        return this;
     }
 }

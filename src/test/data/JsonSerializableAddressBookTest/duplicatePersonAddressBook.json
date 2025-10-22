@@ -22,5 +22,6 @@
     "alcoholicRecord" : "Social drinker",
     "gender" : "F",
     "smokingRecord": "yes"
-  } ]
+  } ],
+  "appointments": []
 }
