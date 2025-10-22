@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,7 +20,7 @@ import seedu.address.model.person.Person;
 public class Appointment {
 
     private final AppointmentTime dateTime;
-    private final Person patient;
+    private final IdentityNumber patientId;
     private final AppointmentNotes notes;
 
     /**
@@ -27,14 +28,14 @@ public class Appointment {
      *
      * @param notes The notes associated with the appointment. May be null.
      * @param dateTime The date and time of the appointment. Must not be null.
-     * @param patient The person involved in the appointment. Must not be null.
+     * @param patientId The identity number of the person involved in the appointment. Must not be null.
      * @throws NullPointerException If {@code dateTime} or {@code patient} is null.
      */
-    public Appointment(AppointmentNotes notes, AppointmentTime dateTime, Person patient) {
-        requireAllNonNull(dateTime, patient);
+    public Appointment(AppointmentNotes notes, AppointmentTime dateTime, IdentityNumber patientId) {
+        requireAllNonNull(dateTime, patientId);
         this.notes = notes;
         this.dateTime = dateTime;
-        this.patient = patient;
+        this.patientId = patientId;
     }
 
     public AppointmentNotes getNotes() {
@@ -45,8 +46,8 @@ public class Appointment {
         return dateTime;
     }
 
-    public Person getPatient() {
-        return patient;
+    public IdentityNumber getPatientId() {
+        return patientId;
     }
 
     /**
@@ -54,7 +55,7 @@ public class Appointment {
      * Two appointments are considered the same if they have the same date and time and involve the same patient.
      *
      * @param otherAppointment The appointment to compare with this appointment. May be null.
-     * @return true if the provided appointment is the same as this appointment based on date, time, and patient;
+     * @return true if the provided appointment is the same as this appointment based on date, time, and patientId;
      *         false otherwise, or if the given appointment is null.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
@@ -63,7 +64,7 @@ public class Appointment {
         }
         return otherAppointment != null
                 && otherAppointment.getDateTime().equals(getDateTime())
-                && otherAppointment.getPatient().equals(getPatient());
+                && otherAppointment.getPatientId().equals(getPatientId());
     }
 
     @Override
@@ -75,7 +76,7 @@ public class Appointment {
             return false;
         }
         return otherAppointment.getDateTime().equals(getDateTime())
-                && otherAppointment.getPatient().equals(getPatient())
+                && otherAppointment.getPatientId().equals(getPatientId())
                 && otherAppointment.getNotes().equals(getNotes());
     }
 
@@ -84,8 +85,8 @@ public class Appointment {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Date: ")
                 .append(getDateTime().toString())
-                .append(" Patient: ")
-                .append(getPatient().toString())
+                .append(" Patient ID: ")
+                .append(getPatientId().toString())
                 .append(" Notes: ")
                 .append(getNotes().toString());
         return builder.toString();
@@ -93,7 +94,7 @@ public class Appointment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(dateTime, patient, notes);
+        return Objects.hash(dateTime, patientId, notes);
     }
 
 }
