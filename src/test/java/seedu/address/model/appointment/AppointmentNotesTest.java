@@ -17,20 +17,18 @@ class AppointmentNotesTest {
     }
 
     @Test
-    void constructor_blankNotes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new AppointmentNotes(""));
+    void constructor_nullNotes_success() {
+        AppointmentNotes notes = new AppointmentNotes(null);
+        assertEquals("", notes.fullNotes);
     }
 
     @Test
-    void isValidNotes_validNotes_returnsTrue() {
+    void isValidNotes_annyNotes_returnsTrue() {
         assertTrue(AppointmentNotes.isValidNotes("Some notes here."));
         assertTrue(AppointmentNotes.isValidNotes("123456"));
         assertTrue(AppointmentNotes.isValidNotes("!@#$%^&*()"));
-    }
-
-    @Test
-    void isValidNotes_blankNotes_returnsFalse() {
-        assertFalse(AppointmentNotes.isValidNotes(""));
+        assertTrue(AppointmentNotes.isValidNotes("    "));
+        assertTrue(AppointmentNotes.isValidNotes(""));
     }
 
     @Test
