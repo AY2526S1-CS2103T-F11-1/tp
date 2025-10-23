@@ -17,4 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ALCOHOLIC_RECORD = new Prefix("ar/");
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
     public static final Prefix PREFIX_SMOKING_RECORD = new Prefix("s/");
+    public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("adt/");
+    public static final Prefix PREFIX_APPOINTMENT_NOTE = new Prefix("note/");
 }
