@@ -11,7 +11,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
+    public static final Prefix PREFIX_EMERGENCY_CONTACT = new Prefix("ec/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_ALLERGY = new Prefix("al/");
     public static final Prefix PREFIX_DATE_OF_BIRTH = new Prefix("dob/");
     public static final Prefix PREFIX_BLOOD_TYPE = new Prefix("b/");
     public static final Prefix PREFIX_ALCOHOLIC_RECORD = new Prefix("ar/");
@@ -19,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SMOKING_RECORD = new Prefix("s/");
     public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("adt/");
     public static final Prefix PREFIX_APPOINTMENT_NOTE = new Prefix("note/");
+    public static final Prefix PREFIX_PAST_DIAGNOSES = new Prefix("pd/");
+    public static final Prefix PREFIX_MEDICINE = new Prefix("m/");
 }

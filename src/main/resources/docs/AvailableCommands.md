@@ -9,15 +9,20 @@ Adds a patient with the specified fields
 - Contact Number: `p/`
 - Email: `e/`
 - Home Address: `a/`
+- Emergency Contact: `ec/`
 - Blood Type: `b/`
 - Gender: `g/`
 - Alcoholic Record: `ar/`
 - Smoking Record: `s/`
 - Tags (optional): `t/`
 
-Example: `add n/Betsy Crowe id/BC67 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/02-02-2000 b/AB- g/F 
-ar/NO s/NO t/criminal`
-<br><br>
+Example: 
+```
+add n/Betsy Crowe id/BC67 dob/02-02-2000 p/+65 12345678 e/betsycrowe@example.com a/67 Yishun Street ec/+60 12-123-4567 b/AB 
+g/Female ar/NO s/NO t/Yishun
+```
+
+
 ## Delete a patient: `delete`
 
 Deletes the person at the specified INDEX

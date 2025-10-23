@@ -24,32 +24,42 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EmergencyContact emergencyContact;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Allergy> allergies = new HashSet<>();
     private final BloodType bloodType;
     private final DateOfBirth dateOfBirth;
     private final AlcoholicRecord alcoholicRecord;
     private final Gender gender;
     private final SmokingRecord smokingRecord;
+    private final Set<Medicine> medicines = new HashSet<>();
+    private final PastDiagnoses pastDiagnoses;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags,
-                  DateOfBirth dateOfBirth, BloodType bloodType, AlcoholicRecord alcoholicRecord, Gender gender,
-                  SmokingRecord smokingRecord) {
-        requireAllNonNull(name, identityNumber, phone, email, address, tags, dateOfBirth, bloodType,
-                alcoholicRecord, gender, smokingRecord);
+    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address,
+                  EmergencyContact emergencyContact, Set<Tag> tags, DateOfBirth dateOfBirth, BloodType bloodType,
+                  AlcoholicRecord alcoholicRecord, Gender gender, SmokingRecord smokingRecord,
+                  Set<Allergy> allergies, PastDiagnoses pastDiagnoses,
+                  Set<Medicine> medicines) {
+        requireAllNonNull(name, identityNumber, phone, email, address, emergencyContact, tags, dateOfBirth, bloodType,
+                alcoholicRecord, gender, smokingRecord, allergies, pastDiagnoses, medicines);
         this.name = name;
         this.identityNumber = identityNumber;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.emergencyContact = emergencyContact;
         this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
         this.dateOfBirth = dateOfBirth;
         this.bloodType = bloodType;
         this.alcoholicRecord = alcoholicRecord;
         this.gender = gender;
         this.smokingRecord = smokingRecord;
+        this.medicines.addAll(medicines);
+        this.pastDiagnoses = pastDiagnoses;
     }
 
     public Name getName() {
@@ -72,6 +82,10 @@ public class Person {
         return address;
     }
 
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
+    }
+
     public DateOfBirth getDateOfBirth() {
         return dateOfBirth;
     }
@@ -82,6 +96,14 @@ public class Person {
 
     public AlcoholicRecord getAlcoholicRecord() {
         return alcoholicRecord;
+    }
+
+    /**
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     public Gender getGender() {
@@ -96,8 +118,20 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns an immutable medicine set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Medicine> getMedicines() {
+        return Collections.unmodifiableSet(medicines);
+    }
+
     public SmokingRecord getSmokingRecord() {
         return smokingRecord;
+    }
+
+    public PastDiagnoses getPastDiagnoses() {
+        return pastDiagnoses;
     }
 
     /**
@@ -134,19 +168,24 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && emergencyContact.equals(otherPerson.emergencyContact)
                 && tags.equals(otherPerson.tags)
+                && medicines.equals(otherPerson.medicines)
+                && allergies.equals(otherPerson.allergies)
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && bloodType.equals(otherPerson.bloodType)
                 && alcoholicRecord.equals(otherPerson.alcoholicRecord)
                 && gender.equals(otherPerson.gender)
-                && smokingRecord.equals(otherPerson.smokingRecord);
+                && smokingRecord.equals(otherPerson.smokingRecord)
+                && pastDiagnoses.equals(otherPerson.pastDiagnoses);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, identityNumber, phone, email, address, tags,
-                dateOfBirth, bloodType, alcoholicRecord, gender, smokingRecord);
+        return Objects.hash(name, identityNumber, phone, email, address, emergencyContact, tags,
+                dateOfBirth, bloodType, alcoholicRecord, gender, smokingRecord,
+                allergies, pastDiagnoses, medicines);
     }
 
     @Override
@@ -157,12 +196,16 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("emergencyContact", emergencyContact)
                 .add("tags", tags)
                 .add("dateOfBirth", dateOfBirth)
                 .add("bloodType", bloodType)
                 .add("alcoholicRecord", alcoholicRecord)
                 .add("gender", gender)
                 .add("smokingRecord", smokingRecord)
+                .add("allergies", allergies)
+                .add("pastDiagnoses", pastDiagnoses)
+                .add("medicines", medicines)
                 .toString();
     }
 

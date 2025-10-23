@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -12,28 +11,39 @@ import seedu.address.commons.util.ToStringBuilder;
 public class CommandResult {
 
     private final String feedbackToUser;
-
-    /** Help information should be shown to the user. */
     private final boolean showHelp;
-
-    /** The application should exit. */
     private final boolean exit;
+    private final Person personToView;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructor for most commands.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+    public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, false, false, null);
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Constructor for help and exit command.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, null);
+    }
+
+    /**
+     * Constructor for view command.
+     */
+    public CommandResult(String feedbackToUser, Person personToView) {
+        this(feedbackToUser, false, false, personToView);
+    }
+
+    /**
+     * Full constructor.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person personToView) {
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.personToView = personToView;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +56,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public Person getPersonToView() {
+        return personToView;
+    }
+
+    public boolean isView() {
+        return personToView != null;
     }
 
     @Override
@@ -62,12 +80,9 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+                && exit == otherCommandResult.exit
+                && ((personToView == null && otherCommandResult.personToView == null)
+                || (personToView != null && personToView.equals(otherCommandResult.personToView)));
     }
 
     @Override
@@ -76,7 +91,12 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("personToView", personToView)
                 .toString();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, showHelp, exit, personToView);
+    }
 }

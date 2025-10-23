@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
+                .append("; Emergency Contact: ")
+                .append(person.getEmergencyContact())
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Date of Birth: ")
@@ -53,8 +55,14 @@ public class Messages {
                 .append(person.getBloodType())
                 .append("; Gender: ")
                 .append(person.getGender())
+                .append("; Past Diagnoses: ")
+                .append(person.getPastDiagnoses())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Allergies: ");
+        person.getAllergies().forEach(builder::append);
+        builder.append("; Medicines: ");
+        person.getMedicines().forEach(builder::append);
         return builder.toString();
     }
 

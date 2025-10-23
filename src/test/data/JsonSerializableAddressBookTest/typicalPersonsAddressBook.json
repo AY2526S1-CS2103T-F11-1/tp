@@ -6,84 +6,112 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "emergencyContact" : "[mother] 12345679",
     "tags" : [ "friends" ],
     "dob" : "20-05-1998",
     "bloodType" : "O",
     "alcoholicRecord" : "Social drinker",
     "gender" : "F",
-    "smokingRecord" : "yes"
+    "smokingRecord" : "Non-smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "Diabetes",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "Benson Meier",
     "identityNumber" : "BM67",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "emergencyContact" : "[father] +65 1324456567",
     "tags" : [ "owesMoney", "friends" ],
     "dob" : "01-01-2000",
     "bloodType" : "O",
     "alcoholicRecord" : "Occasional",
     "gender" : "M",
-    "smokingRecord" : "no"
+    "smokingRecord" : "Heavy smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "Carl Kurz",
     "identityNumber" : "CK67",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "emergencyContact" : "[brother] +60 12-731-7245",
     "tags" : [ ],
     "dob" : "20-12-1998",
     "bloodType" : "O",
     "alcoholicRecord" : "Never",
     "gender" : "M",
-    "smokingRecord" : "yes"
+    "smokingRecord" : "Non-smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "Daniel Meier",
     "identityNumber" : "DM67",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "emergencyContact" : "[sister-in-law] +123 12-731-7245",
     "tags" : [ "friends" ],
     "dob" : "30-05-1995",
     "bloodType" : "O",
     "alcoholicRecord" : "Yes",
     "gender" : "M",
-    "smokingRecord" : "yes"
+    "smokingRecord" : "Quitter",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "Elle Meyer",
     "identityNumber" : "EM67",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "emergencyContact" : "[half-brother] +60 12-731-12345678",
     "tags" : [ ],
     "dob" : "20-11-1999",
     "bloodType" : "O",
     "alcoholicRecord" : "Social drinker",
     "gender" : "M",
-    "smokingRecord" : "no"
+    "smokingRecord" : "Non-smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "Fiona Kunz",
     "identityNumber" : "FK67",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "emergencyContact" : "[some random relationship] 1234567890",
     "tags" : [ ],
     "dob" : "15-08-1997",
     "bloodType" : "O",
     "alcoholicRecord" : "Never",
     "gender" : "M",
-    "smokingRecord" : "no"
+    "smokingRecord" : "Heavy smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   }, {
     "name" : "George Best",
     "identityNumber" : "GB67",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "emergencyContact" : "[some random relationship] 1234567890",
     "tags" : [ "owesMoney", "friends" ],
     "dob" : "20-05-2000",
     "bloodType" : "O",
     "alcoholicRecord" : "Never",
     "gender" : "M",
-    "smokingRecord": "yes"
+    "smokingRecord": "Occasional smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "None",
+    "medicines" : ["antidepressants"]
   } ],
   "appointments": [
     {
@@ -122,4 +150,5 @@
       "patientId": "GB67"
     }
   ]
+
 }

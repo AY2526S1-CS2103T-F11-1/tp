@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="10"
+      style="-fx-padding: 15;">
+    <Label fx:id="nameLabel" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;" />
+    <Label fx:id="identityNumberLabel" style="-fx-text-fill: white;"/>
+    <Label fx:id="phoneLabel" style="-fx-text-fill: white;"/>
+    <Label fx:id="emailLabel" wrapText="true" style="-fx-text-fill: white;"/>
+    <Label fx:id="addressLabel" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;" />
+    <Label fx:id="bloodTypeLabel" style="-fx-text-fill: white;"/>
+    <Label fx:id="alcoholicRecordLabel" wrapText="true" style="-fx-text-fill: white;"/>
+    <Label fx:id="gender" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;" />
+    <Label fx:id="dateOfBirthAndAgeLabel" style="-fx-text-fill: white;"/>
+    <Label fx:id="smokingRecordLabel" style="-fx-text-fill: white;"/>
+    <Label fx:id="pastDiagnosisLabel" wrapText="true" style="-fx-text-fill: white;"/>
+    <Label fx:id="medicineLabel" wrapText="true" style="-fx-text-fill: white;"/>
+    <Label fx:id="AllergiesLabel" wrapText="true" style="-fx-text-fill: white;"/>
+</VBox>

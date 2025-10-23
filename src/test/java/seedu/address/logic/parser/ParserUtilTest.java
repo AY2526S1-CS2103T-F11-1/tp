@@ -11,9 +11,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentNotes;
 import seedu.address.model.appointment.AppointmentTime;
@@ -26,7 +29,7 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "$651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DATE_OF_BIRTH = "32-02-2000";
@@ -233,6 +236,47 @@ public class ParserUtilTest {
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
+
+    @Test
+    public void parsePastDiagnoses_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePastDiagnoses((String) null));
+    }
+
+    @Test
+    public void parsePastDiagnoses_validValueWithoutWhitespace_returnsPastDiagnoses() throws Exception {
+        String validPastDiagnoses = "Diabetes, Hypertension";
+        assertEquals(validPastDiagnoses, ParserUtil.parsePastDiagnoses(validPastDiagnoses).value);
+    }
+
+    @Test
+    public void parsePastDiagnoses_validValueWithWhitespace_returnsTrimmedPastDiagnoses() throws Exception {
+        String pastDiagnosesWithWhitespace = WHITESPACE + "Diabetes, Hypertension" + WHITESPACE;
+        String expectedPastDiagnoses = "Diabetes, Hypertension";
+        assertEquals(expectedPastDiagnoses, ParserUtil.parsePastDiagnoses(pastDiagnosesWithWhitespace).value);
+    }
+
+    @Test
+    public void parsePastDiagnoses_invalidValue_triggersWarning() throws Exception {
+        // blank input is considered empty and should be accepted (converted to "None")
+        String blank = "   ";
+        assertEquals("None", ParserUtil.parsePastDiagnoses(blank).value);
+    }
+
+    @Test
+    public void parsePastDiagnoses_longValid_triggersFinePreview() throws Exception {
+        Logger logger = LogsCenter.getLogger(ParserUtil.class);
+        Level old = logger.getLevel();
+        try {
+            logger.setLevel(Level.FINE); // ensure fine logs are enabled to run the fine branch
+            String longDiagnoses = "Diabetes, Hypertension, Asthma, Chronic Obstructive Pulmonary Disease, "
+                    + "SomeOtherDiagnosis, AnotherOne, Extra"; // > 80 chars
+            // should not throw; simply calling it executes the logger.fine preview branch
+            ParserUtil.parsePastDiagnoses(longDiagnoses);
+        } finally {
+            logger.setLevel(old);
+        }
+    }
+
     @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));

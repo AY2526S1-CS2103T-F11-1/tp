@@ -5,23 +5,31 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "emergencyContact": "[mother] 12512323",
     "tags": [ "friends" ],
     "dob": "20-05-1998",
     "bloodType" : "O",
     "alcoholicRecord" : "Social drinker",
     "gender" : "F",
-    "smokingRecord": "yes"
+    "smokingRecord": "Non-smoker",
+    "allergies": [ "nuts" ],
+    "pastDiagnoses" : "Diabetes",
+    "medicines" : ["antidepressants"]
   }, {
     "name": "Alice Pauline",
     "identityNumber" : "A23",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
+    "emergencyContact": "[mother] 83123123",
     "dob": "20-05-2000",
     "bloodType" : "O",
     "alcoholicRecord" : "Social drinker",
     "gender" : "F",
-    "smokingRecord": "yes"
+    "smokingRecord" : "non-smoker",
+    "allergies" : [ "nuts" ],
+    "pastDiagnoses" : "Diabetes",
+    "medicines" : [ "antidepressants" ]
   } ],
   "appointments": []
 }

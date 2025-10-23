@@ -8,19 +8,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidSmokingRecord(String)}
  */
 public class SmokingRecord {
-    public static final String MESSAGE_CONSTRAINTS = "Smoking record can either be 'yes' or 'no'(case-insensitive).";
-    public static final String VALIDATION_REGEX = "(?i)\\s*(?:yes|no)\\s*";
-    public final boolean isSmoker;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Smoking record cannot be null or empty.";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public final String smokingRecord;
 
     /**
      * Constructs a {@code SmokingRecord}.
      *
-     * @param record A valid smoking record. (either "yes" or "no", case-insensitive)
+     * @param record A valid smoking record.
      */
     public SmokingRecord(String record) {
         requireNonNull(record);
         checkArgument(isValidSmokingRecord(record), MESSAGE_CONSTRAINTS);
-        this.isSmoker = record.equalsIgnoreCase("yes");
+        this.smokingRecord = record;
     }
 
     /**
@@ -32,7 +33,7 @@ public class SmokingRecord {
 
     @Override
     public String toString() {
-        return isSmoker ? "YES" : "NO";
+        return smokingRecord;
     }
 
     @Override
@@ -47,11 +48,11 @@ public class SmokingRecord {
         }
 
         SmokingRecord otherRecord = (SmokingRecord) other;
-        return isSmoker == otherRecord.isSmoker;
+        return smokingRecord.equalsIgnoreCase(otherRecord.smokingRecord);
     }
 
     @Override
     public int hashCode() {
-        return Boolean.hashCode(isSmoker);
+        return smokingRecord.hashCode();
     }
 }

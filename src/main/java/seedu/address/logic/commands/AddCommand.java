@@ -3,12 +3,16 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALCOHOLIC_RECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_DIAGNOSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SMOKING_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,25 +37,35 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_EMERGENCY_CONTACT + "EMERGENCY CONTACT "
             + PREFIX_DATE_OF_BIRTH + "DATE OF BIRTH "
             + PREFIX_BLOOD_TYPE + "BLOOD TYPE "
             + PREFIX_ALCOHOLIC_RECORD + "ALCOHOLIC RECORD "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_SMOKING_RECORD + "SMOKING RECORD "
+            + PREFIX_PAST_DIAGNOSES + "None"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_MEDICINE + "MEDICINE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_IDENTITY_NUMBER + "A91234567 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_EMERGENCY_CONTACT + "[Mother] +6591234567 "
             + PREFIX_BLOOD_TYPE + "AB "
             + PREFIX_ALCOHOLIC_RECORD + "Social drinker "
             + PREFIX_GENDER + "M "
             + PREFIX_DATE_OF_BIRTH + "01-01-2000 "
-            + PREFIX_SMOKING_RECORD + "Yes "
+            + PREFIX_SMOKING_RECORD + "Heavy smoker "
+            + PREFIX_ALLERGY + "nuts "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_PAST_DIAGNOSES + "Diabetes"
+            + PREFIX_MEDICINE + "100mg painkillers/day "
+            + PREFIX_MEDICINE + "100mg Panadol/day";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "A person with this ID already exists";
