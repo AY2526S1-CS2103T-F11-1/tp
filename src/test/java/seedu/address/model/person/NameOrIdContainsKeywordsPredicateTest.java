@@ -19,14 +19,17 @@ public class NameOrIdContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameOrIdContainsKeywordsPredicate firstPredicate = new NameOrIdContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameOrIdContainsKeywordsPredicate secondPredicate = new NameOrIdContainsKeywordsPredicate(secondPredicateKeywordList);
+        NameOrIdContainsKeywordsPredicate firstPredicate =
+                new NameOrIdContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameOrIdContainsKeywordsPredicate secondPredicate =
+                new NameOrIdContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameOrIdContainsKeywordsPredicate firstPredicateCopy = new NameOrIdContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameOrIdContainsKeywordsPredicate firstPredicateCopy =
+                new NameOrIdContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class NameOrIdContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameOrIdContainsKeywordsPredicate predicate = new NameOrIdContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        NameOrIdContainsKeywordsPredicate predicate =
+                new NameOrIdContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -72,6 +76,42 @@ public class NameOrIdContainsKeywordsPredicateTest {
         predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_idContainsKeywords_returnsTrue() {
+        // One keyword
+        NameOrIdContainsKeywordsPredicate predicate =
+                new NameOrIdContainsKeywordsPredicate(Collections.singletonList("A23"));
+        assertTrue(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+
+        // Multiple keywords (one matches)
+        predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("A23", "B99"));
+        assertTrue(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+
+        // Only one matching keyword among others
+        predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("B99", "A23"));
+        assertTrue(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+
+        // Mixed-case keyword (identity matching should be case-insensitive)
+        predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("a23"));
+        assertTrue(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+    }
+
+    @Test
+    public void test_idDoesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        NameOrIdContainsKeywordsPredicate predicate = new NameOrIdContainsKeywordsPredicate(Collections.emptyList());
+        assertFalse(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+
+        // Non-matching keyword
+        predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("B99"));
+        assertFalse(predicate.test(new PersonBuilder().withIdentityNumber("A23").build()));
+
+        // Keywords match phone, email and address, but do not match identity number
+        predicate = new NameOrIdContainsKeywordsPredicate(Arrays.asList("87438807", "alexyeoh@example.com", "Geylang", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withIdentityNumber("A23").withPhone("87438807")
+                .withEmail("alexyeoh@example.com").withAddress("Blk 30 Geylang Street 29, #06-40").build()));
     }
 
     @Test
