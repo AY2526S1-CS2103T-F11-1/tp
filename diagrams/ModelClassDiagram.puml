@@ -25,6 +25,7 @@ Class Allergy
 Class Medicine
 Class AlcoholicRecord
 Class SmokingRecord
+Class PastDiagnoses
 
 Class I #FFFFFF
 }
@@ -54,6 +55,7 @@ Person *--> "*" Medicine
 Person *--> "*" Allergy
 Person *--> AlcoholicRecord
 Person *--> SmokingRecord
+Person *--> PastDiagnoses
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
