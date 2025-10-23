@@ -15,6 +15,7 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
+Class EmergencyContact
 Class Email
 Class Name
 Class Phone
@@ -48,6 +49,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> EmergencyContact
 Person *--> "*" Tag
 Person *--> BloodType
 Person *--> Gender
