@@ -15,10 +15,10 @@ class AppointmentTest {
     void constructor_and_getters() {
         AppointmentNotes notes = new AppointmentNotes("Test notes");
         AppointmentTime time = new AppointmentTime("01-12-2023 14:30");
-        Appointment appointment = new Appointment(notes, time, ALICE);
+        Appointment appointment = new Appointment(notes, time, ALICE.getIdentityNumber());
         assertEquals(notes, appointment.getNotes());
         assertEquals(time, appointment.getDateTime());
-        assertEquals(ALICE, appointment.getPatient());
+        assertEquals(ALICE.getIdentityNumber(), appointment.getPatientId());
     }
 
     @Test
@@ -27,9 +27,9 @@ class AppointmentTest {
         AppointmentNotes notes2 = new AppointmentNotes("Test notes");
         AppointmentNotes notes3 = new AppointmentNotes("Other notes");
         AppointmentTime time = new AppointmentTime("01-12-2023 14:30");
-        Appointment a1 = new Appointment(notes1, time, ALICE);
-        Appointment a2 = new Appointment(notes2, time, ALICE);
-        Appointment a3 = new Appointment(notes3, time, ALICE);
+        Appointment a1 = new Appointment(notes1, time, ALICE.getIdentityNumber());
+        Appointment a2 = new Appointment(notes2, time, ALICE.getIdentityNumber());
+        Appointment a3 = new Appointment(notes3, time, ALICE.getIdentityNumber());
         assertEquals(a1, a2);
         assertNotEquals(a1, a3);
         assertEquals(a1.hashCode(), a2.hashCode());
@@ -40,10 +40,11 @@ class AppointmentTest {
         AppointmentNotes notes1 = new AppointmentNotes("Test notes");
         AppointmentNotes notes2 = new AppointmentNotes("Other notes");
         AppointmentTime time = new AppointmentTime("01-12-2023 14:30");
-        Appointment a1 = new Appointment(notes1, time, ALICE);
-        Appointment a2 = new Appointment(notes2, time, ALICE);
-        Appointment a3 = new Appointment(notes1, new AppointmentTime("02-12-2023 14:30"), ALICE);
-        Appointment a4 = new Appointment(notes1, time, BOB);
+        Appointment a1 = new Appointment(notes1, time, ALICE.getIdentityNumber());
+        Appointment a2 = new Appointment(notes2, time, ALICE.getIdentityNumber());
+        Appointment a3 = new Appointment(notes1, new AppointmentTime("02-12-2023 14:30"),
+                ALICE.getIdentityNumber());
+        Appointment a4 = new Appointment(notes1, time, BOB.getIdentityNumber());
 
         assertTrue(a1.isSameAppointment(a2));
         assertFalse(a1.isSameAppointment(a3));
@@ -56,10 +57,10 @@ class AppointmentTest {
     void toString_containsAllFields() {
         AppointmentNotes notes = new AppointmentNotes("Test notes");
         AppointmentTime time = new AppointmentTime("01-12-2023 14:30");
-        Appointment appointment = new Appointment(notes, time, ALICE);
+        Appointment appointment = new Appointment(notes, time, ALICE.getIdentityNumber());
         String result = appointment.toString();
         assertTrue(result.contains("01-12-2023 14:30"));
-        assertTrue(result.contains("Alice"));
+        assertTrue(result.contains(ALICE.getIdentityNumber().toString()));
         assertTrue(result.contains("Test notes"));
     }
 }

@@ -112,5 +112,42 @@
     "allergies": [ "nuts" ],
     "pastDiagnoses" : "None",
     "medicines" : ["antidepressants"]
-  } ]
+  } ],
+  "appointments": [
+    {
+      "notes": "Routine checkup",
+      "time": "01-12-2023 09:00",
+      "patientId": "AP67"
+    },
+    {
+      "notes": "Dental cleaning",
+      "time": "02-12-2023 10:30",
+      "patientId": "BM67"
+    },
+    {
+      "notes": "Consultation for flu symptoms",
+      "time": "03-12-2023 11:15",
+      "patientId": "CK67"
+    },
+    {
+      "notes": "Follow-up appointment",
+      "time": "04-12-2023 14:00",
+      "patientId": "DM67"
+    },
+    {
+      "notes": "Vaccination",
+      "time": "05-12-2023 15:45",
+      "patientId": "EM67"
+    },
+    {
+      "notes": "Blood test",
+      "time": "06-12-2023 08:30",
+      "patientId": "FK67"
+    },
+    {
+      "notes": "Annual physical exam",
+      "time": "07-12-2023 13:00",
+      "patientId": "GB67"
+    }
+  ]
 }

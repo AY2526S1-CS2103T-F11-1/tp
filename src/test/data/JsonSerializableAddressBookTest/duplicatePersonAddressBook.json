@@ -30,5 +30,6 @@
     "allergies": [ "nuts" ],
     "pastDiagnoses" : "Diabetes",
     "medicines" : ["antidepressants"]
-  } ]
+  } ],
+  "appointments": []
 }

@@ -63,6 +63,14 @@ public class CommandTestUtil {
     public static final String VALID_SMOKING_RECORD_BOB = "Occasional smoker";
     public static final String VALID_PAST_DIAGNOSES_AMY = "Diabetes";
     public static final String VALID_PAST_DIAGNOSES_BOB = "Hypertension";
+    public static final String VALID_SMOKING_RECORD_NO = "no";
+    public static final String VALID_SMOKING_RECORD_YES = "yes";
+
+    public static final String VALID_APPOINTMENT_TIME_AMY = "01-01-2025 10:00";
+    public static final String VALID_APPOINTMENT_TIME_BOB = "02-02-2025 11:00";
+    public static final String VALID_APPOINTMENT_NOTES_AMY = "Amy's appointment";
+    public static final String VALID_APPOINTMENT_NOTES_BOB = "Bob's appointment";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String IDENTITY_NUMBER_DESC_AMY = " " + PREFIX_IDENTITY_NUMBER + VALID_ID_AMY;

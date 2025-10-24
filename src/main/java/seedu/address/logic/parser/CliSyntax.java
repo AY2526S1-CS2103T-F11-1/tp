@@ -21,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SMOKING_RECORD = new Prefix("s/");
     public static final Prefix PREFIX_PAST_DIAGNOSES = new Prefix("pd/");
     public static final Prefix PREFIX_MEDICINE = new Prefix("m/");
+    public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("adt/");
+    public static final Prefix PREFIX_APPOINTMENT_NOTE = new Prefix("note/");
 }

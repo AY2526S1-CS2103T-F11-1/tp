@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentNotes;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -33,6 +35,9 @@ public class ParserUtilTest {
     private static final String INVALID_DATE_OF_BIRTH = "32-02-2000";
     private static final String INVALID_TAG = "#friend";
 
+    // New invalid appointment time (bad day)
+    private static final String INVALID_APPOINTMENT_TIME = "32-01-2020 1000";
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -40,6 +45,9 @@ public class ParserUtilTest {
     private static final String VALID_DATE_OF_BIRTH = "01-01-1990";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_APPOINTMENT_TIME = "01-01-2020 10:00";
+    private static final String VALID_APPOINTMENT_NOTES = "Bring reports";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -160,6 +168,50 @@ public class ParserUtilTest {
         String dateOfBirthWithWhitespace = WHITESPACE + VALID_DATE_OF_BIRTH + WHITESPACE;
         DateOfBirth expectedDateOfBirth = new DateOfBirth(VALID_DATE_OF_BIRTH);
         assertEquals(expectedDateOfBirth, ParserUtil.parseDateOfBirth(dateOfBirthWithWhitespace));
+    }
+
+    // AppointmentTime tests
+    @Test
+    public void parseAppointmentTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointmentTime((String) null));
+    }
+
+    @Test
+    public void parseAppointmentTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentTime(INVALID_APPOINTMENT_TIME));
+    }
+
+    @Test
+    public void parseAppointmentTime_validValueWithoutWhitespace_returnsAppointmentTime() throws Exception {
+        AppointmentTime expected = new AppointmentTime(VALID_APPOINTMENT_TIME);
+        assertEquals(expected, ParserUtil.parseAppointmentTime(VALID_APPOINTMENT_TIME));
+    }
+
+    @Test
+    public void parseAppointmentTime_validValueWithWhitespace_returnsTrimmedAppointmentTime() throws Exception {
+        String timeWithWhitespace = WHITESPACE + VALID_APPOINTMENT_TIME + WHITESPACE;
+        AppointmentTime expected = new AppointmentTime(VALID_APPOINTMENT_TIME);
+        assertEquals(expected, ParserUtil.parseAppointmentTime(timeWithWhitespace));
+    }
+
+    // AppointmentNotes tests
+    @Test
+    public void parseAppointmentNotes_null_returnsEmptyAppointmentNotes() throws Exception {
+        AppointmentNotes expected = new AppointmentNotes("");
+        assertEquals(expected, ParserUtil.parseAppointmentNotes(null));
+    }
+
+    @Test
+    public void parseAppointmentNotes_validValueWithoutWhitespace_returnsAppointmentNotes() throws Exception {
+        AppointmentNotes expected = new AppointmentNotes(VALID_APPOINTMENT_NOTES);
+        assertEquals(expected, ParserUtil.parseAppointmentNotes(VALID_APPOINTMENT_NOTES));
+    }
+
+    @Test
+    public void parseAppointmentNotes_validValueWithWhitespace_returnsTrimmedAppointmentNotes() throws Exception {
+        String notesWithWhitespace = WHITESPACE + VALID_APPOINTMENT_NOTES + WHITESPACE;
+        AppointmentNotes expected = new AppointmentNotes(VALID_APPOINTMENT_NOTES);
+        assertEquals(expected, ParserUtil.parseAppointmentNotes(notesWithWhitespace));
     }
 
     @Test

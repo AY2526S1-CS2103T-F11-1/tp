@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentNotes;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AlcoholicRecord;
 import seedu.address.model.person.Allergy;
@@ -303,5 +305,31 @@ public class ParserUtil {
         requireNonNull(pastDiagnoses);
         String trimmedPastDiagnoses = pastDiagnoses.trim();
         return new PastDiagnoses(trimmedPastDiagnoses);
+    }
+
+    /**
+     * Parses a {@code String appointmentTime} into a {@code AppointmentTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointmentTime} is invalid.
+     */
+    public static AppointmentTime parseAppointmentTime(String appointmentTime) throws ParseException {
+        requireNonNull(appointmentTime);
+        String trimmedAppointmentTime = appointmentTime.trim();
+        if (!AppointmentTime.isValidDateTime(trimmedAppointmentTime)) {
+            throw new ParseException(AppointmentTime.MESSAGE_FORMAT_CONSTRAINTS);
+        }
+        return new AppointmentTime(trimmedAppointmentTime);
+    }
+
+    /**
+     * Parses a {@code String appointmentNotes} into a {@code AppointmentNotes}.
+     * Null string will be parsed as an empty string.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static AppointmentNotes parseAppointmentNotes(String appointmentNotes) throws ParseException {
+        appointmentNotes = appointmentNotes == null ? "" : appointmentNotes;
+        String trimmedAppointmentNotes = appointmentNotes.trim();
+        return new AppointmentNotes(trimmedAppointmentNotes);
     }
 }
