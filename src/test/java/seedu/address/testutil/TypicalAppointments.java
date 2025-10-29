@@ -13,43 +13,43 @@ public class TypicalAppointments {
 
     public static final Appointment APPT_ALICE = new AppointmentBuilder()
             .withNotes("Routine checkup")
-            .withTime("01-12-2023 09:00")
+            .withTime("01-12-2020 09:00")
             .withPatientId(TypicalPersons.ALICE.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_BENSON = new AppointmentBuilder()
             .withNotes("Dental cleaning")
-            .withTime("02-12-2023 10:30")
+            .withTime("02-12-2020 10:30")
             .withPatientId(TypicalPersons.BENSON.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_CARL = new AppointmentBuilder()
             .withNotes("Consultation for flu symptoms")
-            .withTime("03-12-2023 11:15")
+            .withTime("03-12-9999 11:15")
             .withPatientId(TypicalPersons.CARL.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_DANIEL = new AppointmentBuilder()
             .withNotes("Follow-up appointment")
-            .withTime("04-12-2023 14:00")
+            .withTime("04-12-9999 14:00")
             .withPatientId(TypicalPersons.DANIEL.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_ELLE = new AppointmentBuilder()
             .withNotes("Vaccination")
-            .withTime("05-12-2023 15:45")
+            .withTime("05-12-9999 15:45")
             .withPatientId(TypicalPersons.ELLE.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_FIONA = new AppointmentBuilder()
             .withNotes("Blood test")
-            .withTime("06-12-2023 08:30")
+            .withTime("06-12-9999 08:30")
             .withPatientId(TypicalPersons.FIONA.getIdentityNumber())
             .build();
 
     public static final Appointment APPT_GEORGE = new AppointmentBuilder()
             .withNotes("Annual physical exam")
-            .withTime("07-12-2023 13:00")
+            .withTime("07-12-9999 13:00")
             .withPatientId(TypicalPersons.GEORGE.getIdentityNumber())
             .build();
 

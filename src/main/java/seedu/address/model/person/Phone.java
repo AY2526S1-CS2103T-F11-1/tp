@@ -11,9 +11,10 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should be at least 3 digits long and may include an optional '+' "
-                    + "and spaces (e.g. +65 91234567)";
-    public static final String VALIDATION_REGEX = "^\\+?[\\d\\s-]{3,}$";
+            "Phone entries should contain at least 3 digits. "
+                    + "They may include '+', spaces, dashes, parentheses, or short notes "
+                    + "(e.g. +65 9123 4567 (Office), 1234 5678 (HP)).";
+    public static final String VALIDATION_REGEX = ".*\\d{3,}.*";
     public final String value;
 
     /**

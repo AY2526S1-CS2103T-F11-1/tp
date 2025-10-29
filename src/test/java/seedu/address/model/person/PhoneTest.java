@@ -29,13 +29,15 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312$1534")); // symbols other than '-' within digits
+        assertFalse(Phone.isValidPhone("-()")); // only symbols
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("1234 5678 (HP) 2222-3333 (Office)")); // multiple numbers with notes
+        assertTrue(Phone.isValidPhone("(Home) 555-1234")); // parentheses and label
+        assertTrue(Phone.isValidPhone("Contact me at 1800-555-0199 ext. 2")); // text with digits
     }
 
     @Test

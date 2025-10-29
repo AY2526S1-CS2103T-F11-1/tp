@@ -8,6 +8,5 @@
               id="commandTextArea"
               onKeyPressed="#handleCommandEntered"
               wrapText="true"
-              promptText="Enter command here..."
-              prefHeight="100"/>
+              promptText="Enter command here..."/>
 </StackPane>

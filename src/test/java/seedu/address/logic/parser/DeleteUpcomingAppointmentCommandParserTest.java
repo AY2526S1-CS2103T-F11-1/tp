@@ -6,21 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteAppointmentCommand;
+import seedu.address.logic.commands.DeleteUpcomingAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-/*
- * Tests for DeleteAppointmentCommandParser.
+/**
+ * Tests for DeleteUpcomingAppointmentParser.
  */
-public class DeleteAppointmentCommandParserTest {
+public class DeleteUpcomingAppointmentCommandParserTest {
 
-    private final DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
+    private final DeleteUpcomingAppointmentCommandParser parser = new DeleteUpcomingAppointmentCommandParser();
 
     @Test
     public void parse_validArgs_returnsCommand() throws Exception {
         String input = "1";
-        DeleteAppointmentCommand cmd = parser.parse(input);
-        assertEquals(new DeleteAppointmentCommand(Index.fromOneBased(1)), cmd);
+        DeleteUpcomingAppointmentCommand cmd = parser.parse(input);
+        assertEquals(new DeleteUpcomingAppointmentCommand(Index.fromOneBased(1)), cmd);
     }
 
     @Test

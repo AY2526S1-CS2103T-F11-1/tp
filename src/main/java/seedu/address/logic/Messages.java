@@ -55,8 +55,8 @@ public class Messages {
                 .append(person.getBloodType())
                 .append("; Gender: ")
                 .append(person.getGender())
-                .append("; Past Diagnoses: ")
-                .append(person.getPastDiagnoses())
+                .append("; Past Medical History: ")
+                .append(person.getPastMedicalHistory())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Allergies: ");

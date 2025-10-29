@@ -43,13 +43,13 @@ public class SmokingRecordTest {
         assertThrows(NullPointerException.class, () -> SmokingRecord.isValidSmokingRecord(null));
 
         // invalid smoking records
-        assertFalse(SmokingRecord.isValidSmokingRecord("")); // empty string
         assertFalse(SmokingRecord.isValidSmokingRecord(" ")); // spaces only
         assertFalse(SmokingRecord.isValidSmokingRecord("   \t\n")); // multiple whitespace
         assertFalse(SmokingRecord.isValidSmokingRecord(" Non-smoker")); // leading space
         assertFalse(SmokingRecord.isValidSmokingRecord("   Quitter")); // leading spaces
 
         // valid smoking records (any non-null, non-empty string)
+        assertTrue(SmokingRecord.isValidSmokingRecord("")); // empty string
         assertTrue(SmokingRecord.isValidSmokingRecord("Non-smoker"));
         assertTrue(SmokingRecord.isValidSmokingRecord("Heavy smoker"));
         assertTrue(SmokingRecord.isValidSmokingRecord("Occasional"));

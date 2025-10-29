@@ -13,7 +13,7 @@ public class Gender {
             "Genders should not be blank or start with whitespace";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the gender must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[^\\s].*";

@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SmokingRecord {
     public static final String MESSAGE_CONSTRAINTS =
-            "Smoking record cannot be null or empty.";
+            "Smoking record can take any values, and it should not be blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String DEFAULT_SMOKING_RECORD = "N/A";
     public final String smokingRecord;
 
     /**
@@ -20,15 +21,19 @@ public class SmokingRecord {
      */
     public SmokingRecord(String record) {
         requireNonNull(record);
-        checkArgument(isValidSmokingRecord(record), MESSAGE_CONSTRAINTS);
-        this.smokingRecord = record;
+        if (record.isEmpty()) {
+            this.smokingRecord = DEFAULT_SMOKING_RECORD;
+        } else {
+            checkArgument(isValidSmokingRecord(record), MESSAGE_CONSTRAINTS);
+            this.smokingRecord = record;
+        }
     }
 
     /**
      * Returns if a given string is a valid smoking record.
      */
     public static boolean isValidSmokingRecord(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     @Override

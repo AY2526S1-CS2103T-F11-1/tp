@@ -14,15 +14,15 @@ Patient Fields:
     dob\DATE_OF_BIRTH (e.g., 02-02-2000)
     p\PHONE_NUMBER
     e\EMAIL
-    a\HOME_ADDRESS
+    addr\HOME_ADDRESS
     ec\EMERGENCY_CONTACT (e.g., [mother] +60 12-123-4567)
     b\BLOOD_TYPE
     g\GENDER
     ar\ALCOHOLIC_RECORD (e.g., YES or NO)
-    sr\SMOKING_RECORD (e.g., YES or NO)
 
-  [Optional]
-    pd\PAST_DIAGNOSES
+  [Optional - Single Entry]
+    sr\SMOKING_RECORD (e.g., YES or NO)
+    pmh\PAST_MEDICAL_HISTORY
 
   [Optional - Can have multiple]
     t\TAG

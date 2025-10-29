@@ -33,7 +33,7 @@ public class Person {
     private final Gender gender;
     private final SmokingRecord smokingRecord;
     private final Set<Medicine> medicines = new HashSet<>();
-    private final PastDiagnoses pastDiagnoses;
+    private final PastMedicalHistory pastMedicalHistory;
 
     /**
      * Every field must be present and not null.
@@ -41,10 +41,10 @@ public class Person {
     public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address,
                   EmergencyContact emergencyContact, Set<Tag> tags, DateOfBirth dateOfBirth, BloodType bloodType,
                   AlcoholicRecord alcoholicRecord, Gender gender, SmokingRecord smokingRecord,
-                  Set<Allergy> allergies, PastDiagnoses pastDiagnoses,
+                  Set<Allergy> allergies, PastMedicalHistory pastMedicalHistory,
                   Set<Medicine> medicines) {
         requireAllNonNull(name, identityNumber, phone, email, address, emergencyContact, tags, dateOfBirth, bloodType,
-                alcoholicRecord, gender, smokingRecord, allergies, pastDiagnoses, medicines);
+                alcoholicRecord, gender, smokingRecord, allergies, pastMedicalHistory, medicines);
         this.name = name;
         this.identityNumber = identityNumber;
         this.phone = phone;
@@ -59,7 +59,7 @@ public class Person {
         this.gender = gender;
         this.smokingRecord = smokingRecord;
         this.medicines.addAll(medicines);
-        this.pastDiagnoses = pastDiagnoses;
+        this.pastMedicalHistory = pastMedicalHistory;
     }
 
     public Name getName() {
@@ -130,8 +130,8 @@ public class Person {
         return smokingRecord;
     }
 
-    public PastDiagnoses getPastDiagnoses() {
-        return pastDiagnoses;
+    public PastMedicalHistory getPastMedicalHistory() {
+        return pastMedicalHistory;
     }
 
     /**
@@ -177,7 +177,7 @@ public class Person {
                 && alcoholicRecord.equals(otherPerson.alcoholicRecord)
                 && gender.equals(otherPerson.gender)
                 && smokingRecord.equals(otherPerson.smokingRecord)
-                && pastDiagnoses.equals(otherPerson.pastDiagnoses);
+                && pastMedicalHistory.equals(otherPerson.pastMedicalHistory);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class Person {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, identityNumber, phone, email, address, emergencyContact, tags,
                 dateOfBirth, bloodType, alcoholicRecord, gender, smokingRecord,
-                allergies, pastDiagnoses, medicines);
+                allergies, pastMedicalHistory, medicines);
     }
 
     @Override
@@ -204,7 +204,7 @@ public class Person {
                 .add("gender", gender)
                 .add("smokingRecord", smokingRecord)
                 .add("allergies", allergies)
-                .add("pastDiagnoses", pastDiagnoses)
+                .add("pastMedicalHistory", pastMedicalHistory)
                 .add("medicines", medicines)
                 .toString();
     }

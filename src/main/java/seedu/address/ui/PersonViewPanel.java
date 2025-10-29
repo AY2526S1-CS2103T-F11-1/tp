@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -93,11 +94,17 @@ public class PersonViewPanel extends UiPart<Region> {
         addGridRow(medicalInfoGrid, "Blood Type:", person.getBloodType().toString());
         addGridRow(medicalInfoGrid, "Alcoholic Record:", person.getAlcoholicRecord().toString());
         addGridRow(medicalInfoGrid, "Smoking Record:", person.getSmokingRecord().toString());
-        addGridRow(medicalInfoGrid, "Past Diagnoses:", person.getPastDiagnoses().toString());
+        addGridRow(medicalInfoGrid, "Past Medical History:", person.getPastMedicalHistory().toString());
 
         // Lists
-        populateFlowPane(allergiesFlowPane, person.getAllergies());
-        populateFlowPane(medicineFlowPane, person.getMedicines());
+        Set<String> allergyValues = person.getAllergies().stream()
+                .map(a->a.allergyName)
+                .collect(Collectors.toSet());
+        Set<String> medicineValues = person.getMedicines().stream()
+                .map(m->m.medicine)
+                .collect(Collectors.toSet());
+        populateFlowPane(allergiesFlowPane, allergyValues);
+        populateFlowPane(medicineFlowPane, medicineValues);
     }
 
     /**

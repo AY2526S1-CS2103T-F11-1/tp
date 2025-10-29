@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_DIAGNOSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SMOKING_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -44,7 +44,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_IDENTITY_NUMBER,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT, PREFIX_TAG, PREFIX_DATE_OF_BIRTH,
-                PREFIX_SMOKING_RECORD, PREFIX_BLOOD_TYPE, PREFIX_GENDER, PREFIX_ALLERGY, PREFIX_PAST_DIAGNOSES,
+                PREFIX_SMOKING_RECORD, PREFIX_BLOOD_TYPE, PREFIX_GENDER, PREFIX_ALLERGY, PREFIX_PAST_MEDICAL_HISTORY,
                 PREFIX_MEDICINE);
 
         Index index;
@@ -57,7 +57,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT, PREFIX_DATE_OF_BIRTH, PREFIX_SMOKING_RECORD,
-                PREFIX_PAST_DIAGNOSES);
+                PREFIX_PAST_MEDICAL_HISTORY);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -97,9 +97,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setGender(ParserUtil.parseGender(
                     argMultimap.getValue(PREFIX_GENDER).get()));
         }
-        if (argMultimap.getValue(PREFIX_PAST_DIAGNOSES).isPresent()) {
-            editPersonDescriptor.setPastDiagnoses(ParserUtil.parsePastDiagnoses(
-                    argMultimap.getValue(PREFIX_PAST_DIAGNOSES).get()));
+        if (argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).isPresent()) {
+            editPersonDescriptor.setPastMedicalHistory(ParserUtil.parsePastMedicalHistory(
+                    argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPersonDescriptor::setAllergies);

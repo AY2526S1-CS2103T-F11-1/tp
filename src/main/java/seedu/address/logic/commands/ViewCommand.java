@@ -29,18 +29,11 @@ public class ViewCommand extends Command {
 
     private final Index targetIndex;
 
-    private Person personToView;
-
     /**
      * @param targetIndex index of the person in the filtered person list to view
      */
     public ViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-        this.personToView = null;
-    }
-
-    public Person getPersonToView() {
-        return this.personToView;
     }
 
     @Override
@@ -53,13 +46,14 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
-        this.personToView = personToView;
 
         ObservableList<Appointment> personAppointments =
                 model.getFilteredAppointmentList(personToView.getIdentityNumber());
         model.updateViewedPersonAppointmentList(personAppointments);
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
+                false,
+                false,
                 personToView);
     }
 

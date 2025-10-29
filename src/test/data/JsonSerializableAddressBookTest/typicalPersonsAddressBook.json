@@ -14,7 +14,7 @@
     "gender" : "F",
     "smokingRecord" : "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "Diabetes",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Benson Meier",
@@ -30,7 +30,7 @@
     "gender" : "M",
     "smokingRecord" : "Heavy smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Carl Kurz",
@@ -46,7 +46,7 @@
     "gender" : "M",
     "smokingRecord" : "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Daniel Meier",
@@ -62,7 +62,7 @@
     "gender" : "M",
     "smokingRecord" : "Quitter",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Elle Meyer",
@@ -78,7 +78,7 @@
     "gender" : "M",
     "smokingRecord" : "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Fiona Kunz",
@@ -94,7 +94,7 @@
     "gender" : "M",
     "smokingRecord" : "Heavy smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "George Best",
@@ -110,43 +110,43 @@
     "gender" : "M",
     "smokingRecord": "Occasional smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "None",
+    "pastMedicalHistory": "None",
     "medicines" : ["antidepressants"]
   } ],
   "appointments": [
     {
       "notes": "Routine checkup",
-      "time": "01-12-2023 09:00",
+      "time": "01-12-2020 09:00",
       "patientId": "AP67"
     },
     {
       "notes": "Dental cleaning",
-      "time": "02-12-2023 10:30",
+      "time": "02-12-2020 10:30",
       "patientId": "BM67"
     },
     {
       "notes": "Consultation for flu symptoms",
-      "time": "03-12-2023 11:15",
+      "time": "03-12-9999 11:15",
       "patientId": "CK67"
     },
     {
       "notes": "Follow-up appointment",
-      "time": "04-12-2023 14:00",
+      "time": "04-12-9999 14:00",
       "patientId": "DM67"
     },
     {
       "notes": "Vaccination",
-      "time": "05-12-2023 15:45",
+      "time": "05-12-9999 15:45",
       "patientId": "EM67"
     },
     {
       "notes": "Blood test",
-      "time": "06-12-2023 08:30",
+      "time": "06-12-9999 08:30",
       "patientId": "FK67"
     },
     {
       "notes": "Annual physical exam",
-      "time": "07-12-2023 13:00",
+      "time": "07-12-9999 13:00",
       "patientId": "GB67"
     }
   ]

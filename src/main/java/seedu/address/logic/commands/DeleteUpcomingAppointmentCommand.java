@@ -12,14 +12,15 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Deletes an appointment identified using it's displayed index from the address book.
+ * Deletes an upcoming appointment identified using it's displayed index from the address book.
  */
-public class DeleteAppointmentCommand extends Command {
+public class DeleteUpcomingAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "unschedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the appointment identified by the index number used in the displayed appointment list.\n"
+            + ": Deletes the upcoming appointment identified by the index number "
+            + "used in the displayed upcoming appointment list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -27,20 +28,21 @@ public class DeleteAppointmentCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteAppointmentCommand(Index targetIndex) {
+    public DeleteUpcomingAppointmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> lastShownList = model.getFilteredAppointmentList();
+        List<Appointment> upcomingAppointmentsList = model.getUpcomingAppointmentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= upcomingAppointmentsList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX
+                    + ". Please refer to the upcoming appointments list.");
         }
 
-        Appointment appointmentToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Appointment appointmentToDelete = upcomingAppointmentsList.get(targetIndex.getZeroBased());
         model.deleteAppointment(appointmentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 Messages.format(appointmentToDelete)));
@@ -60,11 +62,11 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteAppointmentCommand otherDeleteAppointmentCommand)) {
+        if (!(other instanceof DeleteUpcomingAppointmentCommand otherDeleteUpcomingAppointmentCommand)) {
             return false;
         }
 
-        return targetIndex.equals(otherDeleteAppointmentCommand.targetIndex);
+        return targetIndex.equals(otherDeleteUpcomingAppointmentCommand.targetIndex);
     }
 
 }

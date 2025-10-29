@@ -22,7 +22,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PastDiagnoses;
+import seedu.address.model.person.PastMedicalHistory;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SmokingRecord;
 import seedu.address.model.tag.Tag;
@@ -296,15 +296,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String pastDiagnoses} into a {@code PastDiagnoses}.
+     * Parses a {@code String pastMedicalHistory} into a {@code PastMedicalHistory}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code pastDiagnoses} is invalid.
+     * @throws ParseException if the given {@code pastMedicalHistory} is invalid.
      */
-    public static PastDiagnoses parsePastDiagnoses(String pastDiagnoses) throws ParseException {
-        requireNonNull(pastDiagnoses);
-        String trimmedPastDiagnoses = pastDiagnoses.trim();
-        return new PastDiagnoses(trimmedPastDiagnoses);
+    public static PastMedicalHistory parsePastMedicalHistory(String pastMedicalHistory) throws ParseException {
+        requireNonNull(pastMedicalHistory);
+        String trimmedPastMedicalHistory = pastMedicalHistory.trim();
+        if (!PastMedicalHistory.isValidPastMedicalHistory(trimmedPastMedicalHistory)) {
+            throw new ParseException(PastMedicalHistory.MESSAGE_CONSTRAINTS);
+        }
+        return new PastMedicalHistory(trimmedPastMedicalHistory);
     }
 
     /**

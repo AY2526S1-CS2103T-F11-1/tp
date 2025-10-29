@@ -12,8 +12,9 @@ import java.util.Objects;
 public class EmergencyContact {
 
     public static final String MESSAGE_FORMAT_CONSTRAINTS =
-            "Emergency contact should be in this format: {[relationship]} {phone}\n"
-                    + "example: [mother] 123456789";
+            "Emergency contact should be in the format: [relationship] phone(s)\n"
+                    + "The phone section must include at least 3 digits and may contain symbols, "
+                    + "spaces, or short notes (e.g. [mother] +65 9123 4567 (home), 2222-3333 (office)).";
 
     /**
      * Emergency contact must be in the format:
@@ -21,7 +22,7 @@ public class EmergencyContact {
      * where the relationship is inside square brackets and the phone number
      * contains at least three digits (e.g. [mother] 91234567).
      */
-    public static final String VALIDATION_REGEX = "^\\[[^\\]]+\\]\\s+\\+?[\\d\\s-]{3,}$";
+    public static final String VALIDATION_REGEX = "^\\[[^\\]]+\\]\\s*.*\\d{3,}.*$";
     public final Phone phone;
     public final String relationship;
 

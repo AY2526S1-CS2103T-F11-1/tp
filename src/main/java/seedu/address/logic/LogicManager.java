@@ -44,7 +44,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        this.addressBookParser = new AddressBookParser();
         this.personToView = null;
     }
 
@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        this.personToView = commandResult.getPersonToView();
+        this.personToView = commandResult.getPersonToView().orElse(null);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

@@ -63,7 +63,7 @@ public class Medicine {
      * Format state as text for viewing.
      */
     public String toString() {
-        return medicine;
+        return "[" + medicine + "]";
     }
 
 }

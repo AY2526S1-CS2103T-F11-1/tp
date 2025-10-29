@@ -13,7 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_DIAGNOSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SMOKING_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -62,10 +62,8 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_SMOKING_RECORD_AMY = "Non-smoker";
     public static final String VALID_SMOKING_RECORD_BOB = "Occasional smoker";
-    public static final String VALID_PAST_DIAGNOSES_AMY = "Diabetes";
-    public static final String VALID_PAST_DIAGNOSES_BOB = "Hypertension";
-    public static final String VALID_SMOKING_RECORD_NO = "no";
-    public static final String VALID_SMOKING_RECORD_YES = "yes";
+    public static final String VALID_PAST_MEDICAL_HISTORY_AMY = "Diabetes";
+    public static final String VALID_PAST_MEDICAL_HISTORY_BOB = "Hypertension";
 
     public static final String VALID_APPOINTMENT_TIME_AMY = "01-01-2025 10:00";
     public static final String VALID_APPOINTMENT_TIME_BOB = "02-02-2025 11:00";
@@ -76,8 +74,10 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String IDENTITY_NUMBER_DESC_AMY = " " + PREFIX_IDENTITY_NUMBER + VALID_ID_AMY;
     public static final String IDENTITY_NUMBER_DESC_BOB = " " + PREFIX_IDENTITY_NUMBER + VALID_ID_BOB;
-    public static final String PAST_DIAGNOSES_DESC_AMY = " " + PREFIX_PAST_DIAGNOSES + VALID_PAST_DIAGNOSES_AMY;
-    public static final String PAST_DIAGNOSES_DESC_BOB = " " + PREFIX_PAST_DIAGNOSES + VALID_PAST_DIAGNOSES_BOB;
+    public static final String PAST_MEDICAL_HISTORY_DESC_AMY = " " + PREFIX_PAST_MEDICAL_HISTORY
+            + VALID_PAST_MEDICAL_HISTORY_AMY;
+    public static final String PAST_MEDICAL_HISTORY_DESC_BOB = " " + PREFIX_PAST_MEDICAL_HISTORY
+            + VALID_PAST_MEDICAL_HISTORY_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -105,7 +105,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_IDENTITY_NUMBER_DESC = " "
             + PREFIX_IDENTITY_NUMBER + "John Doe"; // whitespace not allowed in identity number
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "91"; // less than 3 digits in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT
@@ -119,7 +119,7 @@ public class CommandTestUtil {
     public static final String INVALID_MEDICINE_DESC = " " + PREFIX_MEDICINE + " "; // empty string invalid medicine
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + " "; // invalid blood type
     public static final String INVALID_SMOKING_RECORD_DESC = " "
-            + PREFIX_SMOKING_RECORD + " "; // empty string not allowed for smoking record
+            + PREFIX_SMOKING_RECORD + "  "; // empty string not allowed for smoking record
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -134,7 +134,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_FRIEND).withBloodType(VALID_BLOOD_TYPE)
                 .withAlcoholicRecord(VALID_ALCOHOLIC_RECORD_AMY).withSmokingRecord(VALID_SMOKING_RECORD_AMY)
                 .withAllergies(VALID_ALLERGY_NUTS)
-                .withPastDiagnoses(VALID_PAST_DIAGNOSES_AMY).build();
+                .withPastMedicalHistory(VALID_PAST_MEDICAL_HISTORY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withIdentityNumber(VALID_ID_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
@@ -142,7 +142,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withBloodType(VALID_BLOOD_TYPE)
                 .withAlcoholicRecord(VALID_ALCOHOLIC_RECORD_BOB).withSmokingRecord(VALID_SMOKING_RECORD_BOB)
                 .withAllergies(VALID_ALLERGY_NUTS)
-                .withPastDiagnoses(VALID_PAST_DIAGNOSES_BOB).build();
+                .withPastMedicalHistory(VALID_PAST_MEDICAL_HISTORY_BOB).build();
     }
 
     /**

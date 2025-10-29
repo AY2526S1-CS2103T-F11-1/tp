@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
@@ -61,7 +62,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane detailsPanelPlaceholder;
 
     @FXML
-    private SplitPane personSplitPane;
+    private SplitPane mainSplitPane;
+
+    @FXML
+    private StackPane appointmentListPanelPlaceholder;
+
+    @FXML
+    private AppointmentListPanel appointmentListPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -137,7 +144,14 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        handleDefaultView();
+        appointmentListPanel =
+                new AppointmentListPanel(logic.getUpcomingAppointmentList(), logic.getPastAppointmentList());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+
+        detailsPanelPlaceholder.getChildren().clear();
+        Label defaultLabel = new Label("Select a person using the 'view' command to see details.");
+        defaultLabel.setStyle("-fx-text-fill: grey; -fx-font-style: italic;");
+        detailsPanelPlaceholder.getChildren().add(defaultLabel);
     }
 
     /**
@@ -194,31 +208,22 @@ public class MainWindow extends UiPart<Stage> {
             ObservableList<Appointment> pastAppointments = logic.getViewedPersonPastAppointmentList();
 
             PersonViewPanel personViewPanel = new PersonViewPanel(person, upcomingAppointments, pastAppointments);
-
             detailsPanelPlaceholder.getChildren().setAll(personViewPanel.getRoot());
-            personSplitPane.setDividerPositions(0.5);
         } else {
             logger.warning("handleViewPerson called but no person was available in Logic.");
             handleDefaultView();
         }
     }
 
-    private void handleShowAppointments() {
-        ObservableList<Appointment> upcomingAppointments = logic.getUpcomingAppointmentList();
-        ObservableList<Appointment> pastAppointments = logic.getPastAppointmentList();
-
-        AppointmentListPanel appointmentListPanel = new AppointmentListPanel(upcomingAppointments, pastAppointments);
-
-        detailsPanelPlaceholder.getChildren().setAll(appointmentListPanel.getRoot());
-        personSplitPane.setDividerPositions(0.5);
-    }
-
     /**
      * Resets the view to the default single-panel layout (shows only the person list).
      */
     private void handleDefaultView() {
-        personSplitPane.setDividerPositions(1.0);
         detailsPanelPlaceholder.getChildren().clear();
+        Label defaultLabel = new Label("Select a person using the 'view <index>' command to see details.");
+        defaultLabel.setStyle("-fx-text-fill: grey; -fx-font-style: italic;");
+        detailsPanelPlaceholder.getChildren().add(defaultLabel);
+
         logic.clearViewedData();
     }
 
@@ -277,10 +282,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isView()) {
                 handleView();
-            } else if (commandResult.isViewAppointments()) {
-                handleShowAppointments();
-            } else {
-                handleDefaultView(); // Revert to single-panel for other commands
             }
 
             commandResult.getThemePath().ifPresent(this::setTheme);

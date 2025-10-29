@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_DIAGNOSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SMOKING_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,7 +33,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PastDiagnoses;
+import seedu.address.model.person.PastMedicalHistory;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SmokingRecord;
@@ -53,20 +53,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_EMERGENCY_CONTACT, PREFIX_TAG, PREFIX_DATE_OF_BIRTH, PREFIX_BLOOD_TYPE, PREFIX_ALCOHOLIC_RECORD,
-                PREFIX_GENDER, PREFIX_SMOKING_RECORD, PREFIX_ALLERGY, PREFIX_PAST_DIAGNOSES, PREFIX_MEDICINE
+                PREFIX_GENDER, PREFIX_SMOKING_RECORD, PREFIX_ALLERGY, PREFIX_PAST_MEDICAL_HISTORY, PREFIX_MEDICINE
         );
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_EMERGENCY_CONTACT, PREFIX_DATE_OF_BIRTH, PREFIX_BLOOD_TYPE, PREFIX_ALCOHOLIC_RECORD,
-                PREFIX_GENDER, PREFIX_SMOKING_RECORD
+                PREFIX_GENDER
             ) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT, PREFIX_DATE_OF_BIRTH, PREFIX_BLOOD_TYPE,
-                PREFIX_ALCOHOLIC_RECORD, PREFIX_GENDER, PREFIX_SMOKING_RECORD, PREFIX_PAST_DIAGNOSES);
+                PREFIX_ALCOHOLIC_RECORD, PREFIX_GENDER, PREFIX_SMOKING_RECORD, PREFIX_PAST_MEDICAL_HISTORY);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
                 argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
@@ -83,13 +83,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         AlcoholicRecord alcoholicRecord = ParserUtil.parseAlcoholicRecord(
                 argMultimap.getValue(PREFIX_ALCOHOLIC_RECORD).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        SmokingRecord smokingRecord = ParserUtil.parseSmokingRecord(argMultimap.getValue(PREFIX_SMOKING_RECORD).get());
-        PastDiagnoses pastDiagnoses = ParserUtil.parsePastDiagnoses(
-                argMultimap.getValue(PREFIX_PAST_DIAGNOSES).orElse("")
+        SmokingRecord smokingRecord = ParserUtil.parseSmokingRecord(
+                argMultimap.getValue(PREFIX_SMOKING_RECORD).orElse(""));
+        PastMedicalHistory pastMedicalHistory = ParserUtil.parsePastMedicalHistory(
+                argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).orElse("")
         );
 
         Person person = new Person(name, identityNumber, phone, email, address, emergencyContact, tagList, dateOfBirth,
-                bloodType, alcoholicRecord, gender, smokingRecord, allergyList, pastDiagnoses, medicineList);
+                bloodType, alcoholicRecord, gender, smokingRecord, allergyList, pastMedicalHistory, medicineList);
 
         return new AddCommand(person);
     }

@@ -14,7 +14,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PastDiagnoses;
+import seedu.address.model.person.PastMedicalHistory;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SmokingRecord;
@@ -37,7 +37,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ALCOHOLIC_RECORD = "Social drinker";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_SMOKING_RECORD = "Non-smoker";
-    public static final String DEFAULT_PAST_DIAGNOSES = "";
+    public static final String DEFAULT_PAST_MEDICAL_HISTORY = "";
 
     private Name name;
     private IdentityNumber identityNumber;
@@ -53,7 +53,7 @@ public class PersonBuilder {
     private AlcoholicRecord alcoholicRecord;
     private Gender gender;
     private SmokingRecord smokingRecord;
-    private PastDiagnoses pastDiagnoses;
+    private PastMedicalHistory pastMedicalHistory;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -72,7 +72,7 @@ public class PersonBuilder {
         alcoholicRecord = new AlcoholicRecord(DEFAULT_ALCOHOLIC_RECORD);
         gender = new Gender(DEFAULT_GENDER);
         smokingRecord = new SmokingRecord(DEFAULT_SMOKING_RECORD);
-        pastDiagnoses = new PastDiagnoses(DEFAULT_PAST_DIAGNOSES);
+        pastMedicalHistory = new PastMedicalHistory(DEFAULT_PAST_MEDICAL_HISTORY);
         medicines = new HashSet<>();
     }
 
@@ -93,7 +93,7 @@ public class PersonBuilder {
         alcoholicRecord = personToCopy.getAlcoholicRecord();
         gender = personToCopy.getGender();
         smokingRecord = personToCopy.getSmokingRecord();
-        pastDiagnoses = personToCopy.getPastDiagnoses();
+        pastMedicalHistory = personToCopy.getPastMedicalHistory();
         medicines = new HashSet<>(personToCopy.getMedicines());
     }
 
@@ -210,10 +210,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code pastDiagnoses} of the {@code Person} that we are building.
+     * Sets the {@code pastMedicalHistory} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPastDiagnoses(String pastDiagnoses) {
-        this.pastDiagnoses = new PastDiagnoses(pastDiagnoses);
+    public PersonBuilder withPastMedicalHistory(String pastMedicalHistory) {
+        this.pastMedicalHistory = new PastMedicalHistory(pastMedicalHistory);
         return this;
     }
 
@@ -222,6 +222,6 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, identityNumber, phone, email, address, emergencyContact, tags, dateOfBirth, bloodType,
-                alcoholicRecord, gender, smokingRecord, allergies, pastDiagnoses, medicines);
+                alcoholicRecord, gender, smokingRecord, allergies, pastMedicalHistory, medicines);
     }
 }

@@ -46,7 +46,7 @@ public class ThemeCommand extends Command {
         }
 
         String themePath = THEME_MAP.get(theme);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, theme), themePath);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, theme), false, false);
     }
 
     private boolean isValidTheme(String theme) {

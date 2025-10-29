@@ -13,7 +13,7 @@
     "gender" : "F",
     "smokingRecord": "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "Diabetes",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name": "Alice Pauline",
@@ -28,7 +28,7 @@
     "gender" : "F",
     "smokingRecord": "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastDiagnoses" : "Diabetes",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   } ],
   "appointments": []

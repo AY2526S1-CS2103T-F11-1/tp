@@ -163,6 +163,24 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        if (!target.getIdentityNumber().equals(editedPerson.getIdentityNumber())) {
+            IdentityNumber oldId = target.getIdentityNumber();
+            IdentityNumber newId = editedPerson.getIdentityNumber();
+
+            List<Appointment> appointmentsToUpdate = addressBook.getAppointmentList().stream()
+                    .filter(appointment -> appointment.getPatientId().equals(oldId))
+                    .collect(Collectors.toList());
+
+            for (Appointment oldAppointment : appointmentsToUpdate) {
+                Appointment updatedAppointment = new Appointment(
+                        oldAppointment.getNotes(),
+                        oldAppointment.getDateTime(),
+                        newId
+                );
+
+                addressBook.setAppointment(oldAppointment, updatedAppointment);
+            }
+        }
         addressBook.setPerson(target, editedPerson);
     }
 

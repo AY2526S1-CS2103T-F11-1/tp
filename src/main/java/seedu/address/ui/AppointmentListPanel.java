@@ -17,7 +17,6 @@ public class AppointmentListPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
 
-    // Add FXML fields for both ListViews
     @FXML
     private ListView<Appointment> upcomingListView;
     @FXML

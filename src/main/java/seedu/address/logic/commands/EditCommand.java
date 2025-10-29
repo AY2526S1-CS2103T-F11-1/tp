@@ -3,14 +3,16 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALCOHOLIC_RECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_DIAGNOSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAST_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SMOKING_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -40,7 +42,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PastDiagnoses;
+import seedu.address.model.person.PastMedicalHistory;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SmokingRecord;
@@ -68,8 +70,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ALCOHOLIC_RECORD + "ALCOHOLIC RECORD] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_SMOKING_RECORD + "SMOKING RECORD] "
-            + "[" + PREFIX_PAST_DIAGNOSES + "PAST DIAGNOSES] "
+            + "[" + PREFIX_PAST_MEDICAL_HISTORY + "PAST MEDICAL HISTORY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
+            + "[" + PREFIX_MEDICINE + "MEDICINE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com" + "\n"
@@ -112,7 +116,8 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                false, false, editedPerson);
     }
 
     /**
@@ -140,13 +145,13 @@ public class EditCommand extends Command {
         AlcoholicRecord updatedAlcoholicRecord = editPersonDescriptor.getAlcoholicRecord()
                 .orElse(personToEdit.getAlcoholicRecord());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        PastDiagnoses updatedPastDiagnoses = editPersonDescriptor.getPastDiagnoses()
-                .orElse(personToEdit.getPastDiagnoses());
+        PastMedicalHistory updatedPastMedicalHistory = editPersonDescriptor.getPastMedicalHistory()
+                .orElse(personToEdit.getPastMedicalHistory());
 
         return new Person(updatedName, updatedIdentityNumber, updatedPhone, updatedEmail,
                 updatedAddress, updatedEmergencyContact, updatedTags, updatedDateOfBirth, updatedBloodType,
-                updatedAlcoholicRecord, updatedGender, updatedSmokingRecord, updatedAllergies, updatedPastDiagnoses,
-                updatedMedicines);
+                updatedAlcoholicRecord, updatedGender, updatedSmokingRecord, updatedAllergies,
+                updatedPastMedicalHistory, updatedMedicines);
     }
 
     @Override
@@ -192,7 +197,7 @@ public class EditCommand extends Command {
         private AlcoholicRecord alcoholicRecord;
         private Gender gender;
         private SmokingRecord smokingRecord;
-        private PastDiagnoses pastDiagnoses;
+        private PastMedicalHistory pastMedicalHistory;
 
         public EditPersonDescriptor() {}
 
@@ -215,7 +220,7 @@ public class EditCommand extends Command {
             setDateOfBirth(toCopy.dateOfBirth);
             setGender(toCopy.gender);
             setSmokingRecord(toCopy.smokingRecord);
-            setPastDiagnoses(toCopy.pastDiagnoses);
+            setPastMedicalHistory(toCopy.pastMedicalHistory);
             setMedicines(toCopy.medicines);
         }
 
@@ -224,7 +229,8 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, identityNumber, phone, email, address, emergencyContact, tags,
-                    allergies, dateOfBirth, bloodType, alcoholicRecord, gender, smokingRecord, pastDiagnoses);
+                    allergies, dateOfBirth, bloodType, alcoholicRecord, gender, smokingRecord, pastMedicalHistory,
+                    medicines);
         }
 
         public void setName(Name name) {
@@ -314,12 +320,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(smokingRecord);
         }
 
-        public void setPastDiagnoses(PastDiagnoses pastDiagnoses) {
-            this.pastDiagnoses = pastDiagnoses;
+        public void setPastMedicalHistory(PastMedicalHistory pastMedicalHistory) {
+            this.pastMedicalHistory = pastMedicalHistory;
         }
 
-        public Optional<PastDiagnoses> getPastDiagnoses() {
-            return Optional.ofNullable(pastDiagnoses);
+        public Optional<PastMedicalHistory> getPastMedicalHistory() {
+            return Optional.ofNullable(pastMedicalHistory);
         }
 
         /**
@@ -398,7 +404,8 @@ public class EditCommand extends Command {
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(smokingRecord, otherEditPersonDescriptor.smokingRecord)
                     && Objects.equals(allergies, otherEditPersonDescriptor.allergies)
-                    && Objects.equals(pastDiagnoses, otherEditPersonDescriptor.pastDiagnoses);
+                    && Objects.equals(medicines, otherEditPersonDescriptor.medicines)
+                    && Objects.equals(pastMedicalHistory, otherEditPersonDescriptor.pastMedicalHistory);
         }
 
         @Override
@@ -417,7 +424,8 @@ public class EditCommand extends Command {
                     .add("gender", gender)
                     .add("smokingRecord", smokingRecord)
                     .add("allergies", allergies)
-                    .add("pastDiagnoses", pastDiagnoses)
+                    .add("medicines", medicines)
+                    .add("pastMedicalHistory", pastMedicalHistory)
                     .toString();
         }
     }

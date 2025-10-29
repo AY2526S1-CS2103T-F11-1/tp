@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AppointmentsCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePastAppointmentCommand;
+import seedu.address.logic.commands.DeleteUpcomingAppointmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -61,10 +61,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteAppointment() throws Exception {
-        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
-                DeleteAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteAppointmentCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteUpcomingAppointment() throws Exception {
+        DeleteUpcomingAppointmentCommand command = (DeleteUpcomingAppointmentCommand) parser.parseCommand(
+                DeleteUpcomingAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteUpcomingAppointmentCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deletePastAppointment() throws Exception {
+        DeletePastAppointmentCommand command = (DeletePastAppointmentCommand) parser.parseCommand(
+                DeletePastAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeletePastAppointmentCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -114,13 +121,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
-
-    @Test
-    public void parseCommand_appointments() throws Exception {
-        assertTrue(parser.parseCommand(AppointmentsCommand.COMMAND_WORD) instanceof AppointmentsCommand);
-        assertTrue(parser.parseCommand(AppointmentsCommand.COMMAND_WORD + " 3") instanceof AppointmentsCommand);
-    }
-
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

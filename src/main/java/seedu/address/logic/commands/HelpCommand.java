@@ -14,8 +14,45 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    public static final String MESSAGE_WARNING = " \nNote: Additional arguments detected. You may provide extra "
+            + "arguments, but they will be ignored.\n";
+
+    private final boolean hasExtraArgs;
+
+    /*
+     * Constructor for HelpCommand(default) when no extra arguments are provided.
+     */
+    public HelpCommand() {
+        this.hasExtraArgs = false;
+    }
+
+    /*
+     * Constructor for HelpCommand when extra arguments are provided.
+     */
+    public HelpCommand(String args) {
+        this.hasExtraArgs = true;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (hasExtraArgs) {
+            return new CommandResult(SHOWING_HELP_MESSAGE + MESSAGE_WARNING, true, false);
+        } else {
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        HelpCommand otherHelpCommand = (HelpCommand) other;
+        return this.hasExtraArgs == otherHelpCommand.hasExtraArgs;
     }
 }
