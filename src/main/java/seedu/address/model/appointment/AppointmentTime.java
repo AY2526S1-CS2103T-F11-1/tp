@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.List;
 
 import seedu.address.model.util.DateTimeParserUtil;
@@ -19,13 +20,15 @@ public class AppointmentTime {
             "Appointment time should be of the following formats: "
                     + "DD-MM-YYYY HH:mm, DD/MM/YYYY HH:mm or DD.MM.YYYY HH:mm";
 
+    public static final String MESSAGE_PAST_DATE_CONSTRAINTS = "Appointment time should be a valid date and time: ";
+
     public static final String VALIDATION_REGEX =
             "^(0[1-9]|[12]\\d|3[01])[-/.](0[1-9]|1[0-2])[-/.](\\d{4}) ([01]\\d|2[0-4]):([0-5]\\d)$";
 
     public static final List<DateTimeFormatter> FORMATTERS = List.of(
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
-            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+            DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     );
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -43,15 +46,20 @@ public class AppointmentTime {
      */
     public AppointmentTime(String dateTime) {
         requireNonNull(dateTime);
-        checkArgument(isValidDateTime(dateTime), MESSAGE_FORMAT_CONSTRAINTS);
+        checkArgument(isValidDateTimeFormat(dateTime), MESSAGE_FORMAT_CONSTRAINTS);
+        checkArgument(isValidDateTime(dateTime), MESSAGE_PAST_DATE_CONSTRAINTS + dateTime);
         this.dateTime = DateTimeParserUtil.parseDateTime(dateTime, FORMATTERS);
     }
 
     /**
      * Returns true if a given string is a valid dateTime.
      */
+    public static boolean isValidDateTimeFormat(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     public static boolean isValidDateTime(String test) {
-        return test.matches(VALIDATION_REGEX) && DateTimeParserUtil.isValidDateTime(test, FORMATTERS);
+        return DateTimeParserUtil.isValidDateTime(test, FORMATTERS);
     }
 
     /**

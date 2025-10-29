@@ -5,13 +5,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.List;
 
 import seedu.address.model.util.DateParserUtil;
 
 /**
  * Represents a person's date of birth in the system.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateFormat(String)}.
  */
 public class DateOfBirth {
 
@@ -20,6 +21,8 @@ public class DateOfBirth {
                     + "DD-MM-YYYY, DD/MM/YYYY or DD.MM.YYYY";
 
     public static final String MESSAGE_PAST_DATE_CONSTRAINTS = "Date of birth should not be a future date.";
+
+    public static final String MESSAGE_INVALID_DATE_CONSTRAINTS = "Date of birth should be a valid date: ";
 
     /**
      * A list of {@code DateTimeFormatter} objects that define the supported date formats.
@@ -31,9 +34,9 @@ public class DateOfBirth {
      * and ensure compatibility with the system's date handling logic.
      */
     public static final List<DateTimeFormatter> FORMATTERS = List.of(
-        DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-        DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd.MM.uuuu").withResolverStyle(ResolverStyle.STRICT)
     );
 
     /**
@@ -75,16 +78,22 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dateOfBirth) {
         requireNonNull(dateOfBirth);
-        checkArgument(isValidDate(dateOfBirth), MESSAGE_FORMAT_CONSTRAINTS);
+        checkArgument(isValidDateFormat(dateOfBirth), MESSAGE_FORMAT_CONSTRAINTS);
+        System.out.println(isValidDate(dateOfBirth));
+        checkArgument(isValidDate(dateOfBirth), MESSAGE_INVALID_DATE_CONSTRAINTS + dateOfBirth);
         checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_PAST_DATE_CONSTRAINTS);
         this.dateOfBirth = DateParserUtil.parseDate(dateOfBirth, FORMATTERS);
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid date format.
      */
+    public static boolean isValidDateFormat(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX) && DateParserUtil.isValidDate(test, FORMATTERS);
+        return DateParserUtil.isValidDate(test, FORMATTERS);
     }
 
     /**

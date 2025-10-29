@@ -59,7 +59,7 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppointmentTime.class.getSimpleName()));
         }
-        if (!AppointmentTime.isValidDateTime(time)) {
+        if (!AppointmentTime.isValidDateTimeFormat(time)) {
             throw new IllegalValueException(AppointmentTime.MESSAGE_FORMAT_CONSTRAINTS);
         }
         final AppointmentTime time = new AppointmentTime(this.time);

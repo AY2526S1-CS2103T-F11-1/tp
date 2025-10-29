@@ -32,14 +32,20 @@ class AppointmentTimeTest {
     }
 
     @Test
-    void isValidDateTime_validAndInvalidCases() {
-        assertTrue(AppointmentTime.isValidDateTime("01-12-2023 14:30"));
-        assertTrue(AppointmentTime.isValidDateTime("01/12/2023 14:30"));
-        assertTrue(AppointmentTime.isValidDateTime("01.12.2023 14:30"));
-        assertFalse(AppointmentTime.isValidDateTime("2023-12-01 14:30"));
-        assertFalse(AppointmentTime.isValidDateTime("01-12-2023 25:00"));
-        assertFalse(AppointmentTime.isValidDateTime("01-12-2023 14:60"));
-        assertFalse(AppointmentTime.isValidDateTime(""));
+    void isValidDateTimeFormat_validAndInvalidCasesFormat() {
+        assertTrue(AppointmentTime.isValidDateTimeFormat("01-12-2023 14:30"));
+        assertTrue(AppointmentTime.isValidDateTimeFormat("01/12/2023 14:30"));
+        assertTrue(AppointmentTime.isValidDateTimeFormat("01.12.2023 14:30"));
+        assertFalse(AppointmentTime.isValidDateTimeFormat("2023-12-01 14:30"));
+        assertFalse(AppointmentTime.isValidDateTimeFormat("01-12-2023 25:00"));
+        assertFalse(AppointmentTime.isValidDateTimeFormat("01-12-2023 14:60"));
+        assertFalse(AppointmentTime.isValidDateTimeFormat(""));
+    }
+
+    @Test
+    void isValidDateTime_invalidCases() {
+        assertFalse(AppointmentTime.isValidDateTime("29-02-2025 14:30")); // leap day
+        assertFalse(AppointmentTime.isValidDateTime("31/04/2023 14:30")); // wrong day
     }
 
     @Test
