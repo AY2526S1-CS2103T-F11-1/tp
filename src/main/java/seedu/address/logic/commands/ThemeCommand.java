@@ -46,6 +46,7 @@ public class ThemeCommand extends Command {
         }
 
         String themePath = THEME_MAP.get(theme);
+        model.setUserThemePathPreference(themePath);
         return new CommandResult(String.format(MESSAGE_SUCCESS, theme),
                 false, false, null, themePath);
     }

@@ -69,6 +69,14 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Replaces the user's theme preference with the given {@code theme}.
+     */
+    void setUserThemePathPreference(String theme);
+
+    /** Returns the user's theme preference */
+    String getUserThemePathPreference();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);

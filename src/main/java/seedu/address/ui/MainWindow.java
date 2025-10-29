@@ -30,8 +30,8 @@ import seedu.address.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String THEMES_PATH = "/view/";
-    private static String currentTheme = "dark"; // Default theme
+    private static final String DEFAULT_THEME_PATH = "/view/dark.css";
+    private static  String currentThemePath;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, String initialThemePath) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -80,7 +80,8 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setTheme("/view/dark.css");
+        currentThemePath = initialThemePath != null ? initialThemePath : DEFAULT_THEME_PATH; // Default theme
+        setTheme(initialThemePath);
 
         setAccelerators();
 
@@ -225,33 +226,29 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Applies the specified theme to the given stage.
-     */
-    private void applyTheme(String themeName) {
-        if (primaryStage.getScene() == null) {
-            return;
-        }
-        String cssPath = THEMES_PATH + themeName + ".css";
-        primaryStage.getScene().getStylesheets().clear(); // Clear existing styles
-        primaryStage.getScene().getStylesheets().add(cssPath);
-    }
-
-    /**
-     * Sets the theme of the application.
+     * Sets the theme of the application. Includes fallback to default theme.
      * @param themePath The path to the CSS file.
      */
     private void setTheme(String themePath) {
-        primaryStage.getScene().getStylesheets().clear();
-        primaryStage.getScene().getStylesheets().add(
-                getClass().getResource(themePath).toExternalForm());
-    }
-
-    /**
-     * Switches the current theme to the specified theme.
-     */
-    public void handleSwitchTheme(String themeName) {
-        currentTheme = themeName.toLowerCase();
-        applyTheme(currentTheme);
+        if (primaryStage.getScene() == null) {
+            logger.warning("Scene not available for setting theme.");
+            return;
+        }
+        try {
+            String cssUrl = getClass().getResource(themePath).toExternalForm();
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add(cssUrl);
+            currentThemePath = themePath;
+            logger.info("Applied theme: " + themePath);
+        } catch (NullPointerException e) {
+            logger.severe("Could not find theme CSS file: " + themePath + ". Applying default theme.");
+            if (!themePath.equals(DEFAULT_THEME_PATH)) { // Avoid infinite loop if default itself fails
+                setTheme(DEFAULT_THEME_PATH);
+            }
+        } catch (Exception e) {
+            logger.severe("Error applying theme: " + themePath + " - " + e.getMessage());
+            // Optionally add fallback here too
+        }
     }
 
     public PersonListPanel getPersonListPanel() {

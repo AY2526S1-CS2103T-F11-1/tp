@@ -109,6 +109,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public void setUserThemePathPreference(String theme) {
+        requireNonNull(theme);
+        userPrefs.setThemePath(theme);
+    }
+
+    @Override
+    public String getUserThemePathPreference() {
+        return userPrefs.getThemePath();
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
