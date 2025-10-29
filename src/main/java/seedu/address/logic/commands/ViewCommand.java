@@ -52,9 +52,7 @@ public class ViewCommand extends Command {
         model.updateViewedPersonAppointmentList(personAppointments);
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
-                false,
-                false,
-                personToView);
+                false, false, personToView, null);
     }
 
     @Override

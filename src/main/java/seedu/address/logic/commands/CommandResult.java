@@ -22,12 +22,13 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person personToView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         Person personToView, String themePath) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isHelp = showHelp;
         this.isExit = exit;
         this.personToView = Optional.ofNullable(personToView);
-        this.themePath = Optional.empty();
+        this.themePath = Optional.ofNullable(themePath);
     }
 
     /**
@@ -35,7 +36,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null);
+        this(feedbackToUser, false, false, null, null);
     }
 
     /**
@@ -43,7 +44,7 @@ public class CommandResult {
      * the personToView field set to its default value.
      */
     public CommandResult(String feedbackToUser, boolean isHelp, boolean isExit) {
-        this(feedbackToUser, isHelp, isExit, null);
+        this(feedbackToUser, isHelp, isExit, null, null);
     }
 
     public String getFeedbackToUser() {

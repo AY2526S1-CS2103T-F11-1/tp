@@ -38,10 +38,10 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
-    // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AppointmentListPanel appointmentListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,9 +66,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane appointmentListPanelPlaceholder;
-
-    @FXML
-    private AppointmentListPanel appointmentListPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -253,7 +250,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switches the current theme to the specified theme.
      */
     public void handleSwitchTheme(String themeName) {
-        this.currentTheme = themeName.toLowerCase();
+        currentTheme = themeName.toLowerCase();
         applyTheme(currentTheme);
     }
 
