@@ -49,7 +49,7 @@ Appointment *--> "1" IdentityNumber
 Appointment *--> "all" AppointmentXYZProperties
 
 ModelManager --> "~* filtered" Person
-ModelManager --> "~* filtered" Appointment
+ModelManager --> "~* filtered and sorted" Appointment
 
 
 Person -[hidden]down--> I
