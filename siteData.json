@@ -38,6 +38,7 @@
     },
     {
       "src": "DeveloperGuide.md",
+      "title": "Developer Guide",
       "headings": {
         "healthnote-developer-guide": "HealthNote Developer Guide",
         "acknowledgements": "Acknowledgements",
@@ -61,16 +62,7 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "adding-a-person": "Adding a person",
-        "editing-a-person": "Editing a person",
         "deleting-a-person": "Deleting a person",
-        "viewing-a-person": "Viewing a person",
-        "listing-all-persons": "Listing all persons",
-        "finding-a-person": "Finding a person",
-        "clearing-all-entries": "Clearing all entries",
-        "changing-theme": "Changing theme",
-        "getting-help": "Getting help",
-        "exiting-the-application": "Exiting the application",
         "saving-data": "Saving data",
         "non-functional-requirements-2": "Non-Functional Requirements",
         "glossary-2": "Glossary"
