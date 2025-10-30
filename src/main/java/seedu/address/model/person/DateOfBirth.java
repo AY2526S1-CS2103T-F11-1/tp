@@ -34,9 +34,9 @@ public class DateOfBirth {
      * and ensure compatibility with the system's date handling logic.
      */
     public static final List<DateTimeFormatter> FORMATTERS = List.of(
-        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT),
-        DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT),
-        DateTimeFormatter.ofPattern("dd.MM.uuuu").withResolverStyle(ResolverStyle.STRICT)
+        DateTimeFormatter.ofPattern("d-M-uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("d/M/uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("d.M.uuuu").withResolverStyle(ResolverStyle.STRICT)
     );
 
     /**
@@ -62,7 +62,7 @@ public class DateOfBirth {
      * Separators: -, /, or .
      * Years: Four digits
      */
-    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])[-/.](0[1-9]|1[0-2])[-/.](\\d{4})$";
+    public static final String VALIDATION_REGEX = "^(\\d{1,2})([-/.])(\\d{1,2})\\2(\\d{4})$";
 
     public final LocalDate dateOfBirth;
 

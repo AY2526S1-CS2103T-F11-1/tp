@@ -30,6 +30,8 @@ import seedu.address.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String THEMES_PATH = "/view/";
+    private static String currentTheme = "dark"; // Default theme
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -40,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AppointmentListPanel appointmentListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,9 +68,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane appointmentListPanelPlaceholder;
 
-    @FXML
-    private AppointmentListPanel appointmentListPanel;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -80,6 +80,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        setTheme("/view/dark.css");
 
         setAccelerators();
 
@@ -223,6 +225,36 @@ public class MainWindow extends UiPart<Stage> {
         logic.clearViewedData();
     }
 
+    /**
+     * Applies the specified theme to the given stage.
+     */
+    private void applyTheme(String themeName) {
+        if (primaryStage.getScene() == null) {
+            return;
+        }
+        String cssPath = THEMES_PATH + themeName + ".css";
+        primaryStage.getScene().getStylesheets().clear(); // Clear existing styles
+        primaryStage.getScene().getStylesheets().add(cssPath);
+    }
+
+    /**
+     * Sets the theme of the application.
+     * @param themePath The path to the CSS file.
+     */
+    private void setTheme(String themePath) {
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add(
+                getClass().getResource(themePath).toExternalForm());
+    }
+
+    /**
+     * Switches the current theme to the specified theme.
+     */
+    public void handleSwitchTheme(String themeName) {
+        currentTheme = themeName.toLowerCase();
+        applyTheme(currentTheme);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -249,6 +281,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isView()) {
                 handleView();
             }
+
+            commandResult.getThemePath().ifPresent(this::setTheme);
 
             return commandResult;
         } catch (CommandException | ParseException e) {

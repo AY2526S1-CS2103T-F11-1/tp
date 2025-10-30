@@ -13,16 +13,18 @@ public class EmergencyContact {
 
     public static final String MESSAGE_FORMAT_CONSTRAINTS =
             "Emergency contact should be in the format: [relationship] phone(s)\n"
-                    + "The phone section must include at least 3 digits and may contain symbols, "
+                    + "Relationship cannot be blank. "
+                    + "The phone section must include at least 2 consecutive digits and may contain symbols, "
                     + "spaces, or short notes (e.g. [mother] +65 9123 4567 (home), 2222-3333 (office)).";
 
     /**
      * Emergency contact must be in the format:
      * [relationship] phone_number
      * where the relationship is inside square brackets and the phone number
-     * contains at least three digits (e.g. [mother] 91234567).
+     * contains at least two digits (e.g. [mother] 91234567).
      */
-    public static final String VALIDATION_REGEX = "^\\[[^\\]]+\\]\\s*.*\\d{3,}.*$";
+    public static final String VALIDATION_REGEX =
+            "^\\[\\s*[^\\s\\]][^\\]]*\\]\\s*.*\\d{2,}.*$";
     public final Phone phone;
     public final String relationship;
 

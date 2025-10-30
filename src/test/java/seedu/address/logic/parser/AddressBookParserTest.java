@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentNotes;
 import seedu.address.model.appointment.AppointmentTime;
@@ -131,5 +132,25 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_themeLight() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " light") instanceof ThemeCommand);
+    }
+
+    @Test
+    public void parseCommand_themeDark() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " dark") instanceof ThemeCommand);
+    }
+
+    @Test
+    public void parseCommand_themePink() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " pink") instanceof ThemeCommand);
+    }
+
+    @Test
+    public void parseCommand_themeBlue() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " blue") instanceof ThemeCommand);
     }
 }

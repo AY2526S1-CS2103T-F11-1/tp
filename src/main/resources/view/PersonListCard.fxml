@@ -27,7 +27,7 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <FlowPane fx:id="tags" styleClass="tags" hgap="7" vgap="3" />
       <Label fx:id="identityNumber" styleClass="cell_small_label" text="\$identity number" />
       <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
       <Label fx:id="dateOfBirthAndAge" styleClass="cell_small_label" text="\$dateOfBirthAndAge" />

@@ -48,9 +48,7 @@ public class ViewCommand extends Command {
         model.getFilteredAppointmentList(personToView.getIdentityNumber());
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
-                false,
-                false,
-                personToView);
+                false, false, personToView, null);
     }
 
     @Override

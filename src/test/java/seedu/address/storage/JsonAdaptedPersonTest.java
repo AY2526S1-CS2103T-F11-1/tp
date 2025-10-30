@@ -177,7 +177,7 @@ public class JsonAdaptedPersonTest {
                         VALID_ALCOHOLIC_RECORD, VALID_GENDER, VALID_SMOKING_RECORD, VALID_ALLERGIES,
                         VALID_PAST_MEDICAL_HISTORY, VALID_MEDICINES);
 
-        String expectedMessage = DateOfBirth.MESSAGE_FORMAT_CONSTRAINTS;
+        String expectedMessage = DateOfBirth.MESSAGE_PAST_DATE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

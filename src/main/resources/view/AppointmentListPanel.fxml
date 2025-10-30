@@ -9,6 +9,6 @@
     <padding>
         <Insets top="5" right="5" bottom="5" left="5" />
     </padding>
-    <Label text="Upcoming Appointments" styleClass="person-view-section-heading" /> <ListView fx:id="upcomingListView" VBox.vgrow="ALWAYS" />
-    <Label text="Past Appointments" styleClass="person-view-section-heading" /> <ListView fx:id="pastListView" VBox.vgrow="ALWAYS" />
+    <Label text="Upcoming Appointments" styleClass="appointment-section-heading" /> <ListView fx:id="upcomingListView" VBox.vgrow="ALWAYS" />
+    <Label text="Past Appointments" styleClass="appointment-section-heading" /> <ListView fx:id="pastListView" VBox.vgrow="ALWAYS" />
 </VBox>

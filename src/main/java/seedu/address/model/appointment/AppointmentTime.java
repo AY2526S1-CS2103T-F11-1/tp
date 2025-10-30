@@ -23,12 +23,12 @@ public class AppointmentTime {
     public static final String MESSAGE_VALID_DATE_CONSTRAINT = "Appointment time should be a valid date and time: ";
 
     public static final String VALIDATION_REGEX =
-            "^(0[1-9]|[12]\\d|3[01])[-/.](0[1-9]|1[0-2])[-/.](\\d{4}) ([01]\\d|2[0-4]):([0-5]\\d)$";
+            "^(\\d{1,2})([-/.])(\\d{1,2})\\2(\\d{4}) (\\d{2}):(\\d{2})$";
 
     public static final List<DateTimeFormatter> FORMATTERS = List.of(
-            DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
-            DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
-            DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
+            DateTimeFormatter.ofPattern("d-M-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d/M/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("d.M.uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     );
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

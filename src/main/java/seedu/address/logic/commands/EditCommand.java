@@ -71,8 +71,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_SMOKING_RECORD + "SMOKING RECORD] "
             + "[" + PREFIX_PAST_MEDICAL_HISTORY + "PAST MEDICAL HISTORY] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_ALLERGY + "ALLERGY] "
             + "[" + PREFIX_MEDICINE + "MEDICINE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -117,7 +117,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
-                false, false, editedPerson);
+                false, false, editedPerson, null);
     }
 
     /**

@@ -29,13 +29,16 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
+        String expectedPersonDetails = Messages.format(validPerson);
+        String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS, expectedPersonDetails);
+
+        CommandResult expectedCommandResult =
+                new CommandResult(expectedMessage);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                expectedModel);
+        assertCommandSuccess(new AddCommand(validPerson), model, expectedCommandResult, expectedModel);
     }
 
     @Test

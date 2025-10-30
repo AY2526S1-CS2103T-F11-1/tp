@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final Optional<String> themePath;
     private final Optional<Person> personToView;
     private final boolean isHelp;
     private final boolean isExit;
@@ -21,11 +22,12 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person personToView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person personToView, String themePath) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isHelp = showHelp;
         this.isExit = exit;
         this.personToView = Optional.ofNullable(personToView);
+        this.themePath = Optional.ofNullable(themePath);
     }
 
     /**
@@ -33,7 +35,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null);
+        this(feedbackToUser, false, false, null, null);
     }
 
     /**
@@ -41,7 +43,7 @@ public class CommandResult {
      * the personToView field set to its default value.
      */
     public CommandResult(String feedbackToUser, boolean isHelp, boolean isExit) {
-        this(feedbackToUser, isHelp, isExit, null);
+        this(feedbackToUser, isHelp, isExit, null, null);
     }
 
     public String getFeedbackToUser() {
@@ -64,6 +66,10 @@ public class CommandResult {
         return personToView.isPresent();
     }
 
+    public Optional<String> getThemePath() {
+        return themePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -79,7 +85,8 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && isHelp == otherCommandResult.isHelp
                 && isExit == otherCommandResult.isExit
-                && Objects.equals(this.personToView, otherCommandResult.personToView);
+                && Objects.equals(this.personToView, otherCommandResult.personToView)
+                && Objects.equals(themePath, otherCommandResult.themePath);
     }
 
     @Override
@@ -89,11 +96,12 @@ public class CommandResult {
                 .add("personToView", personToView)
                 .add("isHelp", isHelp)
                 .add("isExit", isExit)
+                .add("themePath", themePath)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, personToView, isHelp, isExit);
+        return Objects.hash(feedbackToUser, personToView, themePath, isHelp, isExit);
     }
 }

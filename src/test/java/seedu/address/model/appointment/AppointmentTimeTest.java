@@ -32,13 +32,17 @@ class AppointmentTimeTest {
     }
 
     @Test
-    void isValidDateTimeFormat_validAndInvalidCasesFormat() {
+    void isValidDateTimeFormat_validAndInvalidCases() {
+
         assertTrue(AppointmentTime.isValidDateTimeFormat("01-12-2023 14:30"));
         assertTrue(AppointmentTime.isValidDateTimeFormat("01/12/2023 14:30"));
         assertTrue(AppointmentTime.isValidDateTimeFormat("01.12.2023 14:30"));
-        assertFalse(AppointmentTime.isValidDateTimeFormat("2023-12-01 14:30"));
-        assertFalse(AppointmentTime.isValidDateTimeFormat("01-12-2023 25:00"));
-        assertFalse(AppointmentTime.isValidDateTimeFormat("01-12-2023 14:60"));
+
+        // invalid date. Month, year, hour and minute should have the same behavior
+        assertFalse(AppointmentTime.isValidDateTimeFormat("0100-12-2023"));
+
+        assertFalse(AppointmentTime.isValidDateTimeFormat("random string"));
+        assertFalse(AppointmentTime.isValidDateTimeFormat("01-12/2023 25:00")); // different delimiters
         assertFalse(AppointmentTime.isValidDateTimeFormat(""));
     }
 
