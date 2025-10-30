@@ -547,16 +547,77 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file.<br>
+        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person with all required fields
+
+    1. Test case: `add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000`<br>
+       Expected: New contact is added to the list. Details of the added contact shown in the status message.
+
+    2. Test case: `add n\Jane Smith id\A9876543C`<br>
+       Expected: No person is added. All required fields details should be provided.
+
+    3. Test case: `add n\Jammie id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000`<br>
+       Expected: No person is added. Error message indicates duplicate identity number.
+
+    4. Other incorrect add commands to try: `add`, `add n\Test`, `add id\A1234567D` (missing required fields)<br>
+       Expected: Error details shown in the status message.
+
+2. Adding a person with optional fields
+
+    1. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 t\priorityHigh`<br>
+       Expected: New contact with tags is added to the list.
+
+    2. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 al\nuts`<br>
+       Expected: New contact with allergies is added to the list.
+
+    3. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 m\100mg Panadol/day`<br>
+       Expected: New contact with medicines is added to the list.
+
+    4. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 ar\Social drinker`<br>
+       Expected: New contact with alcoholic record is added to the list.
+
+    5. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 sr\Heavy smoker`<br>
+       Expected: New contact with smoking record is added to the list.
+
+    6. Test case: `Example: add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB g\M dob\01-01-2000 pmh\Diabetes`<br>
+       Expected: New contact with past medical history is added to the list.
+
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `edit 1 p\91234567`<br>
+       Expected: Phone number of first contact is updated. Details of the edited contact shown in the status message.
+
+    3. Test case: `edit 1 id\A9999999Z`<br>
+       Expected: Identity number of first contact is updated if no duplicate exists.
+
+    4. Test case: `edit 1 e\newemail@example.com addr\New Address 123`<br>
+       Expected: Email and address of first contact are updated.
+
+    5. Test case: `edit 1 t\diabetes`<br>
+       Expected: Tags are replaced with only "diabetes" tag.
+
+    6. Test case: `edit 1 al\Aspirin al\Ibuprofen`<br>
+       Expected: Allergies are replaced with new list.
+
+    7. Test case: `edit 0 p\91234567`<br>
+       Expected: No person is edited. Error details shown in the status message.
+
+    8. Other incorrect edit commands to try: `edit`, `edit x p\12345678` (where x is larger than the list size)<br>
+       Expected: No person is edited. Error details shown in the status message.
 
 ### Deleting a person
 
@@ -564,16 +625,172 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
+### Viewing a person
+
+1. Viewing detailed information of a person
+
+    1. Prerequisites: Multiple persons in the list.
+
+    2. Test case: `view 1`<br>
+       Expected: Detailed view panel appears in the center showing all information about the first person, including:
+        - Personal Details (Name, Identity Number, Date of Birth, Gender, Phone, Email, Address)
+        - Medical Details (Emergency Contact, Blood Type, Alcoholic Record, Smoking Record, Past Medical History)
+        - Allergies (if any)
+        - Current Medicines (if any)
+        - Upcoming Appointments
+        - Past Appointments
+
+    3. Test case: `view 0`<br>
+       Expected: No person is viewed. Error message shown.
+
+    4. Test case: `view x` (where x is larger than the list size)<br>
+       Expected: Error message shown.
+
+    5. Other incorrect view commands to try: `view`, `view abc`<br>
+       Expected: Error message shown.
+
+2. Switching between different person views
+
+    1. Test case: `view 1` followed by `view 2`<br>
+       Expected: View switches from first person to second person.
+
+    2. Test case: `view 1` followed by `list` followed by `view 1`<br>
+       Expected: View persists correctly after list command.
+
+### Listing all persons
+
+1. Listing all persons in the address book
+
+    1. Test case: `list`<br>
+       Expected: All persons in the address book are displayed in the person list panel.
+
+    2. Test case after a `find` command: `list`<br>
+       Expected: Resets the view to show all persons instead of filtered results.
+
+    3. Test case: `list xhasdnkcsdf` (garbage value after list command)<br>
+       Expected:  All persons in the address book are displayed with a note says "Additional arguments detected. You may provide extra arguments, but they will be ignored.".
+
+### Finding a person
+
+1. Finding persons by name keywords
+
+    1. Prerequisites: Multiple persons can have the same or similar names; only identity numbers must be unique.
+
+    2. Test case: `find John`<br>
+       Expected: List shows all persons with "John" in their name (case-insensitive). This includes names like "John Doe", "Peter John", "Alice John".
+
+    3. Test case: `find John Doe`<br>
+       Expected: List shows all persons with "John" OR "Doe" in their name.
+
+    4. Test case: `find`<br>
+       Expected: Error message indicates invalid command format.
+
+    5. Test case: `find xyz` (where no person has this name)<br>
+       Expected: Empty list shown with "0 persons listed!" message.
+
+2. Finding persons by identity number
+
+    1. Prerequisites: Multiple persons in the list with unique identity numbers.
+
+    2. Test case: `find A1234567B`<br>
+       Expected: List shows the person with identity number "A1234567B". Only one person should be shown as identity numbers are unique.
+
+    3. Test case: `find A12`<br>
+       Expected: Error message or no results, as partial identity numbers are not supported. The full identity number must be provided.
+
+    4. Test case: `find a1234567b` (lowercase)<br>
+       Expected: List shows the person with identity number "A1234567B" if the search is case-insensitive for identity numbers.
+
+### Clearing all entries
+
+1. Clearing all data from the address book with confirmation
+
+    1. Prerequisites: At least one person in the list.
+
+    2. Test case: `clear`<br>
+       Expected: No data is cleared. Message displayed: "Invalid command format! clear: Clears all data in HealthNote. To confirm, type 'clear CONFIRM'. This action cannot be undone."
+
+    3. Test case: `clear CONFIRM`<br>
+       Expected: All persons and appointments are removed. Success message shown: "HealthNote has been cleared!". Person list panel is empty. Upcoming and past appointments panels are empty.
+
+    4. Test case: `clear confirm` (lowercase)<br>
+       Expected: No data is cleared. Error message indicating invalid command format. The confirmation keyword must be in uppercase "CONFIRM".
+
+    5. Test case: `clear YES` or `clear CONFIRM extra`<br>
+       Expected: No data is cleared. Error message indicating invalid command format. Only "CONFIRM" in uppercase is accepted.
+
+2. Clearing empty address book
+
+    1. Prerequisites: Address book is already empty (no persons or appointments).
+
+    2. Test case: `clear CONFIRM`<br>
+       Expected: Success message still shown: "HealthNote has been cleared!". Address book remains empty.
+
+### Changing theme
+
+1. Switching between different themes
+
+    1. Prerequisites: Application is running.
+
+    2. Test case: `theme dark`<br>
+       Expected: Application theme changes to dark theme. Success message "Theme changed to dark." displayed.
+
+    3. Test case: `theme light`<br>
+       Expected: Application theme changes to light theme. Success message "Theme changed to light." displayed.
+
+    4. Test case: `theme blue`<br>
+       Expected: Application theme changes to blue theme. Success message "Theme changed to blue." displayed.
+
+    5. Test case: `theme pink`<br>
+       Expected: Application theme changes to pink theme. Success message "Theme changed to pink." displayed.
+
+    6. Test case: `theme DARK` (uppercase)<br>
+       Expected: Application theme changes to dark mode (command should be case-insensitive). Success message displayed.
+
+    7. Test case: `theme invalid`<br>
+       Expected: Error message "Invalid theme name. Available themes: dark, light, blue, pink" displayed.
+
+    8. Test case: `theme`<br>
+       Expected: Error message indicating missing theme parameter.
+   
+### Getting help
+
+1. Opening the help window
+
+    1. Test case: `help`<br>
+       Expected: Help window opens showing available commands.
+
+    2. Test case: Press F1 key<br>
+       Expected: Help window opens.
+
+    3. Test case: Click on "Help" menu and select "Help F1"<br>
+       Expected: Help window opens.
+
+### Exiting the application
+
+1. Exiting via command
+
+    1. Test case: `exit`<br>
+       Expected: Application closes gracefully. All data is automatically saved.
+
+2. Exiting via menu
+
+    1. Test case: Click on "File" menu and select "Exit"<br>
+       Expected: Application closes gracefully. All data is automatically saved.
+
+3. Exiting via window close button
+
+    1. Test case: Click the window close button (X)<br>
+       Expected: Application closes gracefully. All data is automatically saved.
 
 ### Saving data
 
