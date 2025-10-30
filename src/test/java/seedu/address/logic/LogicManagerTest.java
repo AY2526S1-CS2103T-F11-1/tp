@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.IDENTITY_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEDICINE_DESC_ANTIDEPRESSANT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PAST_MEDICAL_HISTORY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SMOKING_RECORD_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -178,8 +179,8 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + IDENTITY_NUMBER_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + EMERGENCY_CONTACT_DESC_AMY + DATE_OF_BIRTH_DESC_AMY
                 + BLOOD_TYPE_DESC + ALCOHOLIC_RECORD_DESC_AMY + GENDER_DESC_AMY + SMOKING_RECORD_DESC_AMY
-                + ALLERGY_DESC_NUTS + MEDICINE_DESC_ANTIDEPRESSANT;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withPastMedicalHistory("").build();
+                + ALLERGY_DESC_NUTS + MEDICINE_DESC_ANTIDEPRESSANT + PAST_MEDICAL_HISTORY_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

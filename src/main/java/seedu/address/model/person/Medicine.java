@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Medicine {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Medicine field should not be blank or start with whitespace";
+            "Medicine can take any values, and should not be blank";
 
     /*
      * The first character of the medicine name must not be a whitespace,

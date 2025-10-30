@@ -37,7 +37,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ALCOHOLIC_RECORD = "Social drinker";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_SMOKING_RECORD = "Non-smoker";
-    public static final String DEFAULT_PAST_MEDICAL_HISTORY = "";
+    public static final String DEFAULT_PAST_MEDICAL_HISTORY = "Diabetes";
 
     private Name name;
     private IdentityNumber identityNumber;

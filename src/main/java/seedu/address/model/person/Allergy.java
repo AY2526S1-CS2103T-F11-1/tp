@@ -9,8 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Allergy {
 
-    public static final String MESSAGE_CONSTRAINTS = "Allergy names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Allergy can take any values, and should not be blank";
+    /*
+     * The first character of allergy must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "^[^\\s].*";
 
     public final String allergyName;
 

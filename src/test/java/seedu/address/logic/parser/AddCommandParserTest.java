@@ -254,32 +254,6 @@ public class AddCommandParserTest {
                         + EMERGENCY_CONTACT_DESC_AMY + DATE_OF_BIRTH_DESC_AMY + BLOOD_TYPE_DESC + ALLERGY_DESC_NUTS
                         + ALCOHOLIC_RECORD_DESC_AMY + GENDER_DESC_AMY + SMOKING_RECORD_DESC_AMY + TAG_DESC_FRIEND
                         + PAST_MEDICAL_HISTORY_DESC_AMY, new AddCommand(expectedPerson));
-
-        // zero past medical history
-        expectedPerson = new PersonBuilder(AMY).withTags("husband").withPastMedicalHistory("").build();
-        assertParseSuccess(parser,
-                NAME_DESC_AMY + IDENTITY_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + EMERGENCY_CONTACT_DESC_AMY + DATE_OF_BIRTH_DESC_AMY + BLOOD_TYPE_DESC + TAG_DESC_HUSBAND
-                        + ALCOHOLIC_RECORD_DESC_AMY + GENDER_DESC_AMY + SMOKING_RECORD_DESC_AMY + ALLERGY_DESC_NUTS
-                        + MEDICINE_DESC_ANTIDEPRESSANT, new AddCommand(expectedPerson));
-
-
-        // zero alcoholic record
-        expectedPerson = new PersonBuilder(AMY).withTags("husband").withAlcoholicRecord("").build();
-        assertParseSuccess(parser,
-                NAME_DESC_AMY + IDENTITY_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + EMERGENCY_CONTACT_DESC_AMY + DATE_OF_BIRTH_DESC_AMY + BLOOD_TYPE_DESC + TAG_DESC_HUSBAND
-                        + GENDER_DESC_AMY + PAST_MEDICAL_HISTORY_DESC_AMY + SMOKING_RECORD_DESC_AMY
-                        + ALLERGY_DESC_NUTS + MEDICINE_DESC_ANTIDEPRESSANT, new AddCommand(expectedPerson));
-
-
-        // zero smoking record
-        expectedPerson = new PersonBuilder(AMY).withTags("husband").withSmokingRecord("").build();
-        assertParseSuccess(parser,
-                NAME_DESC_AMY + IDENTITY_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + EMERGENCY_CONTACT_DESC_AMY + DATE_OF_BIRTH_DESC_AMY + BLOOD_TYPE_DESC + TAG_DESC_HUSBAND
-                        + ALCOHOLIC_RECORD_DESC_AMY + GENDER_DESC_AMY + PAST_MEDICAL_HISTORY_DESC_AMY
-                        + ALLERGY_DESC_NUTS + MEDICINE_DESC_ANTIDEPRESSANT, new AddCommand(expectedPerson));
     }
 
     @Test

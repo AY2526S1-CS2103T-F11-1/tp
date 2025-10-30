@@ -38,8 +38,12 @@ Hello indie doctors, welcome to our **HealthNote User Guide**!
     * [View a patient's medical information: `view`](#view-a-patients-medical-information-view)
     * [Listing all patients : `list`](#listing-all-patients-list)
     * [Locating patients by name: `find`](#locating-patients-by-name-find)
+  * [Features - Managing Appointment Records](#features-managing-appointment-records)
+    * [Scheduling an appointment: `schedule`](#scheduling-an-appointment-schedule-)
+    * [Deleting upcoming appointment: `unschedule`](#deleting-upcoming-appointment-unschedule)
+    * [Delete past appointment: `forget`](#delete-past-appointment-forget)
   * [Feature - Clearing Data](#feature-clearing-data)
-    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Clearing all entries : `clear`](#clearing-all-entries-clear)
   * [Feature - Data Management](#feature-data-management)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -100,13 +104,13 @@ Here are the key components of the HealthNote User Interface (UI), designed for 
 
 *insert the UI photo here this is just a placeholder for now with labels for the components*
 
-| No | Component              | Description                                                                                                             |
-|----|------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| 1  | Command Input          | This is where the user inputs commands to perform various tasks.                                                        |
-| 2  | Command Result         | Displays the output and the result of performing a command.                                                             |
-| 3  | Patient List Panel     | Displays the list of patients for viewing.                                                                              |
-| 4  | View Patient Panel     | Displays all the data fields of patients which the user requests to view.                                               |
-| 5  | View Appointment Panel | Displays all the data fields of appointments which the user requests to view, including past and upcoming appointments. |
+| No | Component        | Description                                                                            |
+|----|------------------|----------------------------------------------------------------------------------------|
+| 1  | Command Input    | This is where the user inputs commands to perform various tasks.                       |
+| 2  | Command Result   | Displays the output and the result of performing a command.                            |
+| 3  | Patient List     | Displays the list of patients.                                                         |
+| 4  | View Patient     | Displays all the data fields of patients which the user requests to view.              |
+| 5  | Appointment List | Displays the upcoming and past appointments, including past and upcoming appointments. |
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -168,23 +172,34 @@ Here are the key components of the HealthNote User Interface (UI), designed for 
 
 ### Input Constraints Table
 
-| **Field (with Prefix)**                | **Valid Input(s)**                                      | **Invalid Input(s)**     | **Requirement(s)**                                                                              |
-|----------------------------------------|---------------------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------|
-| **n\\NAME**                            | Alex the 3rd, John Doe, Damith s/o Sankar Ashish        | (Empty)                  | Names should only contain alphanumeric characters and spaces, and not be blank                  |
-| **id\\IDENTITY_NUMBER**                | S1234567A, T7654321B, 060402-06-6767                    | %&!, 12 3-4              | Identity number should only contain alphanumeric characters,"-" and/or "_", without spaces      |
-| **p\\CONTACT_NUMBER**                  | 9888-3333 (Office)                                      | abcdefg, 23              | Must contain at least 3 consecutive digits                                                      |
-| **e\\EMAIL**                           | e01234567@u.nus.edu, jinHeng@gmail.com                  | joe@, asd@@@asd          | Emails should be of the format local-part@domain                                                |
-| **addr\\HOME_ADDRESS**                 | 123 Main St                                             | (Empty)                  | Addresses can take any values, and it should not be blank                                       |
-| **ec\\EMERGENCY_CONTACT**              | [Mother] 9888-3333 (Office), [Brother] 9777-3333 (Home) | 9888-3333, 2222aaaa      | Must be in the form [{relationship}] {phone} where phone contains at least 3 consecutive digits |
-| **dob\\DATE_OF_BIRTH**                 | 05-23-1967, 12/10/1987                                  | 99-05-23, 19871312, 2020-12-20 | Date of birth should be of the following formats: DD-MM-YYYY, DD/MM/YYYY, or MM-DD-YYYY         |
-| **b\\BLOOD_TYPE**                      | A+, O-, AB, Bombay (hh), A Rh(D) negative               | (Empty)                  | Blood types should not be blank                                               |
-| **g\\GENDER**                          | Male, Female, Non-binary, Helicopter                    | (Empty)                  | Genders should not be blank                                                                     |
-| **ar\\ALCOHOLIC_RECORD**               | None, Occasionally, Heavy                               | (Empty)                  | Alcoholic Record should not be blank                                                            |
-| **sr\\SMOKING_RECORD**       | None, Occasionally, Quitter, Heavy                      | (Empty)                  | Smoking Record should not be blank                                                              |
-| **pmh\\PAST_MEDICAL_HISTORY** | None, Diabetes, Hypertension                            | (Empty)                  | Past Medical History should not be blank                                                        |
-| **t\\TAG**        | Urgent, HighRisk, VIP                                   | is_diabetic              | Tags names should be alphanumeric, without spaces                                               |
-| **al\\ALLERGY**   | Peanuts, Penicillin                                     | peanut_                  | Allergy names should be alphanumeric, without spaces                                            |
-| **m\\MEDICINE**   | 500mg Ibuprofen, 2 Panadol capsules/day                 | (Empty)                  | Medicine field should not be blank                                                              |
+<div markdown="block" class="alert alert-warning">
+
+**Caution:**
+
+* The symbol is `\` is reserved as a command delimiter. While it is not explicitly prohibited in command values, it is
+  highly discouraged as it could cause unexpected behaviour.
+
+</div>
+
+| **Field (with Prefix)**        | **Valid Input(s)**                                      | **Invalid Input(s)**           | **Requirement(s)**                                                                                            |
+|--------------------------------|---------------------------------------------------------|--------------------------------|---------------------------------------------------------------------------------------------------------------|
+| **n\\NAME**                    | Alex the 3rd, John Doe, Damith s/o Sankar Ashish        | (Empty)                        | Names can take any values, and it should not be blank                                                         |
+| **id\\IDENTITY_NUMBER**        | S1234567A, T7654321B, 060402-06-6767                    | %&!, 12 3-4                    | Identity number should only contain alphanumeric characters and/or "-", without spaces                        |
+| **p\\CONTACT_NUMBER**          | 9888-3333 (Office)                                      | abcdefg, 3 3 3                 | Must contain at least 2 consecutive digits                                                                    |
+| **e\\EMAIL**                   | e01234567@u.nus.edu, jinHeng@gmail.com                  | joe@, asd@@@asd                | Emails should be of the format local-part@domain                                                              |
+| **addr\\HOME_ADDRESS**         | 123 Main St                                             | (Empty)                        | Addresses can take any values, and it should not be blank                                                     |
+| **ec\\EMERGENCY_CONTACT**      | [Mother] 9888-3333 (Office), [Brother] 9777-3333 (Home) | 9888-3333, 2222aaaa            | Must be in the form [{relationship}] {phone} where phone contains at least 2 consecutive digits               |
+| **dob\\DATE_OF_BIRTH**         | 05-23-1967, 12/10/1987                                  | 99-05-23, 19871312, 2020-12-20 | Date of birth should be of the following formats: D-M-YYYY, D/M/YYYY, or M-D-YYYY                             |
+| **b\\BLOOD_TYPE**              | A+, O-, AB, Bombay (hh), A Rh(D) negative               | (Empty)                        | Blood types can take any values, and it should not be blank                                                   |
+| **g\\GENDER**                  | Male, Female, Non-binary, Helicopter                    | (Empty)                        | Genders can take any values, and it should not be blank                                                       |
+| **ar\\ALCOHOLIC_RECORD**       | None, Occasionally, Heavy                               | (Empty)                        | Alcoholic Record can take any values, and it should not be blank                                              |
+| **sr\\SMOKING_RECORD**         | None, Occasionally, Quitter, Heavy                      | (Empty)                        | Smoking Record can take any values, and it should not be blank                                                |
+| **pmh\\PAST_MEDICAL_HISTORY**  | None, Diabetes, Hypertension                            | (Empty)                        | Past Medical History can take any values, and it should not be blank                                          |
+| **t\\TAG**                     | Urgent, HighRisk, VIP                                   | (Empty)                        | Tags names can take any values, and it should not be blank                                                    |
+| **al\\ALLERGY**                | Peanuts, Penicillin                                     | (Empty)                        | Allergy names can take any values, and it should not be blank                                                 |
+| **m\\MEDICINE**                | 500mg Ibuprofen, 2 Panadol capsules/day                 | (Empty)                        | Medicine field can take any values, and it should not be blank                                                |
+| **adt\\APPOINTMENT_DATE_TIME** | 13-10-2025 10:00                                        | 22233344                       | Appointment date & time should be of the following formats: D-M-YYYY HH:MM, D/M/YYYY HH:MM, or M-D-YYYY HH:MM |
+| **note\\APPOINTMENT_NOTE**     | Needs IV Drip                                                        | (Empty)                        | Appointment notes can take any values, and it should not be blank                                                                                            |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -204,7 +219,9 @@ Format: `help`
 
 Changes the theme of the app.
 
-Format: `theme <COLOUR>`
+Format: `theme COLOUR`
+
+There are 4 themes: `light`, `dark`, `blue`, `pink`
 
 Example: `theme light`
 
@@ -224,26 +241,26 @@ Format: `exit`
 
 Adds a patient to the address book.
 
-Format: `add id\IDENTITY n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS dob\DATE_OF_BIRTH b\BLOOD_TYPE g\GENDER
-ar\ALCOHOLIC_RECORDS(YES/NO) sr\SMOKING_RECORDS(YES/NO) [t\TAG] [al\ALLERGY] [m\MEDICINE]…​`
+Format: `add n\NAME id\IDENTITY_NUMBER p\PHONE e\EMAIL addr\ADDRESS ec\EMERGENCY CONTACT dob\DATE OF BIRTH b\BLOOD TYPE 
+[ar\ALCOHOLIC RECORD] g\GENDER [sr\SMOKING RECORD] [pmh\PAST MEDICAL HISTORY] [t\TAG][al\ALLERGY][m\MEDICINE]...…​`
 
-| **Field (with Prefix)**                  | **Compulsory?** | **Can have multiple?** | **Description**                                                                     |
-|------------------------------------------|-----------------|------------------------|-------------------------------------------------------------------------------------|
-| **n\NAME**                              | Yes             | No                     | Full legal name of the patient.                                                     |
-| **id\IDENTITY_NUMBER**                  | Yes             | No                     | Unique identification number (e.g., national ID, passport number, or hospital ID).  |
-| **p\CONTACT_NUMBER**                    | Yes             | No                     | Primary phone number for reaching the patient.                                      |
-| **e\EMAIL**                             | Yes             | No                     | Patient’s active email address for communication.                                   |
-| **addr\HOME_ADDRESS**                   | Yes             | No                     | Current residential address of the patient.                                         |
-| **ec\EMERGENCY_CONTACT**                | Yes             | No                     | Name and contact details of a person to call in case of emergency.                  |
-| **dob\DATE_OF_BIRTH**                   | Yes             | No                     | Patient’s date of birth.                                                            |
-| **b\BLOOD_TYPE**                        | Yes             | No                     | Patient’s blood group (e.g., A+, O-, etc.).                                         |
-| **g\GENDER**                            | Yes             | No                     | Gender identity of the patient (e.g., Male, Female, Non-binary, Prefer not to say). |
-| **ar\ALCOHOLIC_RECORD**                 | Yes             | No                     | Indicates whether the patient consumes alcohol and relevant details or frequency.   |
-| **sr\SMOKING_RECORD (optional)**        | No              | No                     | Indicates whether the patient smokes and relevant details or frequency.             |
-| **pmh\PAST_MEDICAL_HISTORY (optional)** | No              | No                     | Summary of major past illnesses, surgeries, or chronic conditions.                         |
-| **t\TAG (optional, multiple)**          | No              | Yes                    | Custom labels or categories for organising patients.                                |
-| **al\ALLERGY (optional, multiple)**     | No              | Yes                    | List of known allergies (e.g., “Peanuts”, “Penicillin”).                            |
-| **m\MEDICINE (optional, multiple)**     | No              | Yes                    | List of current medications prescribed to the patient.                              |
+| **Field (with Prefix)**      | **Compulsory?** | **Can have multiple?** | **Description**                                                                     |
+|------------------------------|-----------------|------------------------|-------------------------------------------------------------------------------------|
+| **n\NAME**                   | Yes             | No                     | Full legal name of the patient.                                                     |
+| **id\IDENTITY_NUMBER**       | Yes             | No                     | Unique identification number (e.g., national ID, passport number, or hospital ID).  |
+| **p\CONTACT_NUMBER**         | Yes             | No                     | Primary phone number for reaching the patient.                                      |
+| **e\EMAIL**                  | Yes             | No                     | Patient’s active email address for communication.                                   |
+| **addr\HOME_ADDRESS**        | Yes             | No                     | Current residential address of the patient.                                         |
+| **ec\EMERGENCY_CONTACT**     | Yes             | No                     | Name and contact details of a person to call in case of emergency.                  |
+| **dob\DATE_OF_BIRTH**        | Yes             | No                     | Patient’s date of birth.                                                            |
+| **b\BLOOD_TYPE**             | Yes             | No                     | Patient’s blood group (e.g., A+, O-, etc.).                                         |
+| **g\GENDER**                 | Yes             | No                     | Gender identity of the patient (e.g., Male, Female, Non-binary, Prefer not to say). |
+| **ar\ALCOHOLIC_RECORD**      | No              | No                     | Indicates whether the patient consumes alcohol and relevant details or frequency.   |
+| **sr\SMOKING_RECORD**        | No              | No                     | Indicates whether the patient smokes and relevant details or frequency.             |
+| **pmh\PAST_MEDICAL_HISTORY** | No              | No                     | Summary of major past illnesses, surgeries, or chronic conditions.                         |
+| **t\TAG**                    | No              | Yes                    | Custom labels or categories for organising patients.                                |
+| **al\ALLERGY**               | No              | Yes                    | List of known allergies (e.g., “Peanuts”, “Penicillin”).                            |
+| **m\MEDICINE**               | No              | Yes                    | List of current medications prescribed to the patient.                              |
 
 
 <box type="tip" seamless>
@@ -256,9 +273,12 @@ ar\ALCOHOLIC_RECORDS(YES/NO) sr\SMOKING_RECORDS(YES/NO) [t\TAG] [al\ALLERGY] [m\
 </box>
 
 Examples:
-* `add id\A00001234A n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01 dob\01-01-1990 b\O+ g\M ar\NO sr\NO`
-* `add id\B00004567B n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 dob\02-02-2000 b\AB- g\F ar\NO sr\NO
-t\criminal`
+* `add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567
+ b\AB ar\Social drinker g\M dob\01-01-2000 sr\Heavy smoker al\nuts t\priorityHigh t\diabetesFollowUp pmh\Diabetes
+ m\100mg painkillers/day m\100mg Panadol/day`
+
+* `add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567
+  b\AB ar\Social drinker g\M dob\01-01-2000`
 
 **Here is a list of common errors and how to prevent them**
 
@@ -267,7 +287,7 @@ t\criminal`
 | The person already exists in the address book | You are adding a patient with the same id as an existing patient | Ensure that you do not enter a patient with the same id as an existing patient. |
 | Invalid command format!                       | Some of the essential prefixes could be missing or misspelled   | Refer to the [command format](#adding-a-patient-add)                 |
 | Unknown command                               | The `add` command may be misspelled or not entirely in lowercase | Ensure that you use `add` exactly in lowercase.                      |
-| Invalid field inputs                          | You have entered invalid inputs for a field.                    | Ensure that your inputs meet the constraints stated in the [Input Constraints Table](#input-constraints-table)          |
+| Errors relating to invalid field inputs       | You have entered invalid inputs for a field.                    | Ensure that your inputs meet the constraints stated in the [Input Constraints Table](#input-constraints-table)          |
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -276,8 +296,9 @@ t\criminal`
 
 Edits an existing patient in the address book.
 
-Format: `edit INDEX [id\IDENTITY] [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [dob\DATE_OF_BIRTH] [b\BLOOD_TYPE] [g\GENDER]
-[ar\ALCOHOLIC_RECORDS(YES/NO)] [sr\SMOKING_RECORDS(YES/NO)] [t\TAG] [m\MEDICINE] [al\ALLERGY]…​`
+Format: `edit INDEX [n\NAME] [id\IDENTITY_NUMBER] [p\PHONE] [e\EMAIL] [addr\ADDRESS]
+ [ec\EMERGENCY_CONTACT] [dob\DATE OF BIRTH] [b\BLOOD TYPE] [ar\ALCOHOLIC RECORD] [g\GENDER] [sr\SMOKING RECORD] 
+ [pmh\PAST MEDICAL HISTORY] [t\TAG] [al\ALLERGY] [m\MEDICINE]...…​`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -286,7 +307,7 @@ Format: `edit INDEX [id\IDENTITY] [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [dob\
 <div markdown="block" class="alert alert-info">
 
 **ℹ️ Info:**<br>
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative. This applies to medicines and allergies as well
 * You can remove all the patient’s tags by typing `t\` without
   specifying any tags after it.
 * You can remove all the patient’s medicine record by typing `m\` without
@@ -327,9 +348,9 @@ Examples:
 | The person already exists in the address book | You are editing a patient to have the same id as an existing patient                      | Ensure that you do not enter a patient with the same id as an existing patient.                               |
 | Invalid command format!                       | Some of the prefixes could be missing or misspelled, or you entered a non-positive index. | Refer to the [command format](#editing-a-patient-edit)                                                        |
 | Unknown command                               | The `edit` command may be misspelled or not entirely in lowercase                         | Ensure that you use `edit` exactly in lowercase.                                                              |
-| Invalid field inputs                          | You have entered invalid inputs for a field.                                              | Ensure that your inputs meet the constraints stated in the [Input Constraints Table](#input-constraints-table) |
-|      The person index provided is invalid                                         | You have entered an invalid index                                                         | Ensure that the index not more than the number of patients in HealthNote.                                     |
-|                   At least one field to edit must be provided.                                                                | You have not entered any fields to edit.                                                  | Enter at least one field to edit.                                                                             |
+| Errors relating to invalid field inputs       | You have entered invalid inputs for a field.                                              | Ensure that your inputs meet the constraints stated in the [Input Constraints Table](#input-constraints-table) |
+| The person index provided is invalid          | You have entered an invalid index                                                         | Ensure that the index not more than the number of patients in HealthNote.                                     |
+| At least one field to edit must be provided.  | You have not entered any fields to edit.                                                  | Enter at least one field to edit.                                                                             |
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -367,7 +388,7 @@ Examples:
 
 Displays the medical information of the patient at the specified INDEX
 
-Format: `view <INDEX>`
+Format: `view INDEX`
 
 Example: `view 1`
 
@@ -395,6 +416,52 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features - Managing Appointment Records
+
+### Scheduling an appointment: `schedule` 
+
+Adds the appointment for the patient identified by the index number used in the displayed patient list.
+
+Format: `schedule INDEX adt\APPOINTMENT_TIME [note\APPOINTMENT_NOTE]`
+
+* Adds an appointment the patient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed **patient** list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Note that APPOINTMENT_NOTE is optional
+
+Example:
+* `schedule 1 adt\13-10-2025 10:00 note\Needs IV Drip`
+
+### Deleting upcoming appointment: `unschedule`
+
+Deletes the upcoming appointment identified by the index number used in the displayed upcoming appointment list.
+
+Format: `unschedule INDEX`
+
+* Deletes the upcoming appointment at the specified `INDEX`.
+* The index refers to the index number shown in the displayed **Upcoming Appointments** list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `unschedule 1`
+
+### Delete past appointment: `forget`
+
+Deletes the past appointment identified by the index number used in the displayed past appointment list.
+
+Format: `forget INDEX`
+
+* Deletes the past appointment at the specified `INDEX`.
+* The index refers to the index number shown in the displayed **Past Appointments** list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `forget 1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -499,15 +566,18 @@ Summary of all the commands.
 </box>
 
 
-| Action     | Format, Examples                                                                                                                                                                                                                                                                                                                           |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id\IDENTITY n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS dob\DATE_OF_BIRTH b\BLOOD_TYPE g\GENDER ar\ALCOHOLIC_RECORDS(YES/NO) sr\SMOKING_RECORDS(YES/NO) [t\TAG] [al\ALLERGY] [m\MEDICINE]…​` <br> e.g., `add id\A00001234A n\John Doe p\98765432 e\johnd@example.com a\John street, block 123, #01-01 dob\01-01-1990 b\O+ g\M ar\NO s\NO` |
-| **Clear**  | `clear CONFIRM`                                                                                                                                                                                                                                                                                                                            |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                                                        |
-| **Edit**   | `edit INDEX [id\IDENTITY] [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [dob\DATE_OF_BIRTH] [b\BLOOD_TYPE] [g\GENDER] [ar\ALCOHOLIC_RECORDS(YES/NO)] [sr\SMOKING_RECORDS(YES/NO)] [t\TAG]…​`<br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`                                                                                               |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                 |
-| **List**   | `list`                                                                                                                                                                                                                                                                                                                                     |
-| **View**   | `view INDEX`<br> e.g., `view 1`                                                                                                                                                                                                                                                                                                            |
-| **Help**   | `help`                                                                                                                                                                                                                                                                                                                                     |
+| Action                        | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                       | `n\NAME id\IDENTITY_NUMBER p\PHONE e\EMAIL addr\ADDRESS ec\EMERGENCY CONTACT dob\DATE OF BIRTH b\BLOOD TYPE [ar\ALCOHOLIC RECORD] g\GENDER [sr\SMOKING RECORD] [pmh\PAST MEDICAL HISTORY] [t\TAG][al\ALLERGY][m\MEDICINE]...…​` <br> e.g., `add n\John Doe id\A91234567 p\98765432 e\johnd@example.com addr\311, Clementi Ave 2, #02-25 ec\[Mother] +6591234567 b\AB ar\Social drinker g\M dob\01-01-2000 sr\Heavy smoker al\nuts t\priorityHigh t\diabetesFollowUp pmh\Diabetes m\100mg painkillers/day m\100mg Panadol/day` |
+| **Clear**                     | `clear CONFIRM`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Delete**                    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Edit**                      | `INDEX [n\NAME] [id\IDENTITY_NUMBER] [p\PHONE] [e\EMAIL] [addr\ADDRESS] [ec\EMERGENCY_CONTACT] [dob\DATE OF BIRTH] [b\BLOOD TYPE] [ar\ALCOHOLIC RECORD] [g\GENDER] [sr\SMOKING RECORD] [pmh\PAST MEDICAL HISTORY] [t\TAG] [al\ALLERGY] [m\MEDICINE]...…​`<br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`                                                                                                                                                                                                                |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **List**                      | `list`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **View**                      | `view INDEX`<br> e.g., `view 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Help**                      | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Schedule an Appointment**   | `schedule INDEX adt\APPOINTMENT_DATE_TIME [note\NOTE]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Unschedule an appointment** | `unschedule INDEX`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| **Remove a Past Appointment** | `forget INDEX`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 [Back to Table of Contents](#table-of-contents)

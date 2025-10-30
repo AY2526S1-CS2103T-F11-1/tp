@@ -103,12 +103,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE_OF_BIRTH).get());
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
         AlcoholicRecord alcoholicRecord = ParserUtil.parseAlcoholicRecord(
-                argMultimap.getValue(PREFIX_ALCOHOLIC_RECORD).orElse(""));
+                argMultimap.getValue(PREFIX_ALCOHOLIC_RECORD).orElse("None"));
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         SmokingRecord smokingRecord = ParserUtil.parseSmokingRecord(
-                argMultimap.getValue(PREFIX_SMOKING_RECORD).orElse(""));
+                argMultimap.getValue(PREFIX_SMOKING_RECORD).orElse("None"));
         PastMedicalHistory pastMedicalHistory = ParserUtil.parsePastMedicalHistory(
-                argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).orElse("")
+                argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).orElse("None")
         );
 
         Person person = new Person(name, identityNumber, phone, email, address, emergencyContact, tagList, dateOfBirth,

@@ -28,12 +28,12 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_PHONE = "$4";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DATE_OF_BIRTH = "32-02-2000";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = " ";
 
     // New invalid appointment time (bad day)
     private static final String INVALID_APPOINTMENT_TIME = "32-01-2020 1000";
@@ -59,7 +59,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -267,10 +267,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePastMedicalHistory_invalidValue_triggersWarning() throws Exception {
-        // blank input is considered empty and should be accepted (converted to "None")
-        String blank = "   ";
-        assertEquals("None", ParserUtil.parsePastMedicalHistory(blank).value);
+    public void parsePastMedicalHistory_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePastMedicalHistory(""));
     }
 
     @Test

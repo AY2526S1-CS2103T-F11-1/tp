@@ -10,14 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class IdentityNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "The identity number must consist only of letters, digits, underscores, or hyphens,"
+            "The identity number must consist only of letters, digits, or hyphens,"
                     + " and it should not be blank or contain any whitespace characters";
 
     /*
-     * The identity number must consist only of letters, digits, underscores, or hyphens.
+     * The identity number must consist only of letters, digits or hyphens.
      * It cannot be blank or contain any whitespace characters.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}_-]+$";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}-]+$";
 
     public final String identityNumber;
 

@@ -51,27 +51,31 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withDateOfBirth("01-01-2000").withTags("owesMoney", "friends").withBloodType("O")
             .withAlcoholicRecord("Occasional").withGender("M").withSmokingRecord("Heavy smoker")
-            .withAllergies("nuts").withMedicines("antidepressants").build();
+            .withAllergies("nuts").withPastMedicalHistory("Diabetes").withMedicines("antidepressants").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withIdentityNumber("CK67")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
             .withEmergencyContact("[brother] +60 12-731-7245")
             .withDateOfBirth("20-12-1998").withBloodType("O").withAlcoholicRecord("Never").withGender("M")
-            .withSmokingRecord("Non-smoker").withAllergies("nuts").withMedicines("antidepressants").build();
+            .withSmokingRecord("Non-smoker")
+            .withPastMedicalHistory("Diabetes").withAllergies("nuts").withMedicines("antidepressants").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withIdentityNumber("DM67")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withEmergencyContact("[sister-in-law] +123 12-731-7245").withTags("friends")
             .withDateOfBirth("30-05-1995").withBloodType("O").withAlcoholicRecord("Never").withGender("M")
-            .withSmokingRecord("Quitter").withAllergies("nuts").withMedicines("antidepressants").build();
+            .withSmokingRecord("Quitter").withAllergies("nuts").withMedicines("antidepressants")
+            .withPastMedicalHistory("Diabetes").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withIdentityNumber("EM67")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave")
             .withEmergencyContact("[half-brother] +60 12-731-12345678")
             .withDateOfBirth("20-11-1999").withBloodType("O").withAlcoholicRecord("Social drinker").withGender("M")
-            .withSmokingRecord("Non-smoker").withAllergies("nuts").withMedicines("antidepressants").build();
+            .withSmokingRecord("Non-smoker").withAllergies("nuts").withMedicines("antidepressants")
+            .withPastMedicalHistory("Diabetes").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withIdentityNumber("FK67")
             .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo")
             .withEmergencyContact("[some random relationship] 1234567890")
             .withDateOfBirth("15-08-1997").withBloodType("O").withAlcoholicRecord("Never").withGender("M")
-            .withSmokingRecord("Heavy smoker").withAllergies("nuts").withMedicines("antidepressants").build();
+            .withSmokingRecord("Heavy smoker").withAllergies("nuts").withMedicines("antidepressants")
+            .withPastMedicalHistory("Diabetes").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withIdentityNumber("GB67")
             .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street")
             .withEmergencyContact("[some random relationship] 1234567890")

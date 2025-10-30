@@ -30,7 +30,7 @@
     "gender" : "M",
     "smokingRecord" : "Heavy smoker",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Carl Kurz",
@@ -46,7 +46,7 @@
     "gender" : "M",
     "smokingRecord" : "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Daniel Meier",
@@ -62,7 +62,7 @@
     "gender" : "M",
     "smokingRecord" : "Quitter",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Elle Meyer",
@@ -78,7 +78,7 @@
     "gender" : "M",
     "smokingRecord" : "Non-smoker",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "Fiona Kunz",
@@ -94,7 +94,7 @@
     "gender" : "M",
     "smokingRecord" : "Heavy smoker",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   }, {
     "name" : "George Best",
@@ -110,7 +110,7 @@
     "gender" : "M",
     "smokingRecord": "Occasional smoker",
     "allergies": [ "nuts" ],
-    "pastMedicalHistory": "None",
+    "pastMedicalHistory": "Diabetes",
     "medicines" : ["antidepressants"]
   } ],
   "appointments": [

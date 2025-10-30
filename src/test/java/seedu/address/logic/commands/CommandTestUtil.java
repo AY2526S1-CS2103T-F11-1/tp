@@ -102,7 +102,7 @@ public class CommandTestUtil {
     public static final String SMOKING_RECORD_DESC_AMY = " " + PREFIX_SMOKING_RECORD + VALID_SMOKING_RECORD_AMY;
     public static final String SMOKING_RECORD_DESC_BOB = " " + PREFIX_SMOKING_RECORD + VALID_SMOKING_RECORD_BOB;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME; // empty string not allowed in names
     public static final String INVALID_IDENTITY_NUMBER_DESC = " "
             + PREFIX_IDENTITY_NUMBER + "John Doe"; // whitespace not allowed in identity number
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "9 1 1"; // less than consecutive 2 digits
@@ -112,14 +112,14 @@ public class CommandTestUtil {
             + "[mom] $12345"; // $ not allowed in the phone number
     public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "41-01-2000"; // invalid date
     public static final String INVALID_ALCOHOLIC_RECORD_DESC = " "
-            + PREFIX_ALCOHOLIC_RECORD + " "; // empty string not allowed for alcoholic record
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + " "; // empty string not allowed for gender
-    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + " "; // empty string invalid for allergy
-    public static final String INVALID_MEDICINE_DESC = " " + PREFIX_MEDICINE + " "; // empty string invalid medicine
-    public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + " "; // invalid blood type
+            + PREFIX_ALCOHOLIC_RECORD; // empty string not allowed for alcoholic record
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // empty string not allowed in tags
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER; // empty string not allowed for gender
+    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY; // empty string invalid for allergy
+    public static final String INVALID_MEDICINE_DESC = " " + PREFIX_MEDICINE; // empty string invalid medicine
+    public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE; // empty string invalid blood type
     public static final String INVALID_SMOKING_RECORD_DESC = " "
-            + PREFIX_SMOKING_RECORD + "  "; // empty string not allowed for smoking record
+            + PREFIX_SMOKING_RECORD; // empty string not allowed for smoking record
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -152,7 +152,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -168,7 +168,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

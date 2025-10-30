@@ -13,12 +13,6 @@ public class PastMedicalHistoryTest {
     }
 
     @Test
-    public void constructor_emptyString_setsValueToNone() {
-        PastMedicalHistory pd = new PastMedicalHistory("");
-        assertTrue(pd.value.equals("None"));
-    }
-
-    @Test
     public void constructor_validString_setsValueCorrectly() {
         String validMedicalHistory = "Diabetes, Hypertension";
         PastMedicalHistory pd = new PastMedicalHistory(validMedicalHistory);

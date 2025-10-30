@@ -287,19 +287,25 @@ public class ParserUtil {
      * Parses a {@code String value} into a {@code SmokingRecord}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static SmokingRecord parseSmokingRecord(String smokingRecord) {
+    public static SmokingRecord parseSmokingRecord(String smokingRecord) throws ParseException {
         requireNonNull(smokingRecord);
-        String trimmedRecord = smokingRecord.trim();
-        return new SmokingRecord(trimmedRecord);
+        String trimmedSmokingRecord = smokingRecord.trim();
+        if (!SmokingRecord.isValidSmokingRecord(trimmedSmokingRecord)) {
+            throw new ParseException(SmokingRecord.MESSAGE_CONSTRAINTS);
+        }
+        return new SmokingRecord(trimmedSmokingRecord);
     }
 
     /**
      * Parses a {@code String pastMedicalHistory} into a {@code PastMedicalHistory}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static PastMedicalHistory parsePastMedicalHistory(String pastMedicalHistory) {
+    public static PastMedicalHistory parsePastMedicalHistory(String pastMedicalHistory) throws ParseException {
         requireNonNull(pastMedicalHistory);
         String trimmedPastMedicalHistory = pastMedicalHistory.trim();
+        if (!PastMedicalHistory.isValidPastMedicalHistory(trimmedPastMedicalHistory)) {
+            throw new ParseException(PastMedicalHistory.MESSAGE_CONSTRAINTS);
+        }
         return new PastMedicalHistory(trimmedPastMedicalHistory);
     }
 

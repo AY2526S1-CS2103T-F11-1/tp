@@ -14,12 +14,6 @@ public class SmokingRecordTest {
     }
 
     @Test
-    public void constructor_emptyString_setsValueToNone() {
-        SmokingRecord smokingRecord = new SmokingRecord("");
-        assertTrue(smokingRecord.value.equals("None"));
-    }
-
-    @Test
     public void constructor_validString_setsValueCorrectly() {
         String validSmokingRecord = "Heavy smoker";
         SmokingRecord smokingRecord = new SmokingRecord(validSmokingRecord);
