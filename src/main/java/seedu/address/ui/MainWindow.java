@@ -130,15 +130,19 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        assert personListPanelPlaceholder != null : "personListPanelPlaceholder' was not added";
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        assert resultDisplayPlaceholder != null : "resultDisplayPlaceholder' was not added";
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        assert statusbarPlaceholder != null : "statusbarPlaceholder' was not added";
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        assert commandBoxPlaceholder != null : "commandBoxPlaceholder' was not added";
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
@@ -169,6 +173,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        logger.fine("Handling help.");
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -185,6 +190,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        logger.fine("Handling exit.");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
@@ -217,24 +223,13 @@ public class MainWindow extends UiPart<Stage> {
      * Resets the view to the default single-panel layout (shows only the person list).
      */
     private void handleDefaultView() {
+        logger.fine("Handling default view.");
         detailsPanelPlaceholder.getChildren().clear();
         Label defaultLabel = new Label("Select a person using the 'view <index>' command to see details.");
         defaultLabel.setStyle("-fx-text-fill: grey; -fx-font-style: italic;");
         detailsPanelPlaceholder.getChildren().add(defaultLabel);
 
         logic.clearViewedData();
-    }
-
-    /**
-     * Applies the specified theme to the given stage.
-     */
-    private void applyTheme(String themeName) {
-        if (primaryStage.getScene() == null) {
-            return;
-        }
-        String cssPath = THEMES_PATH + themeName + ".css";
-        primaryStage.getScene().getStylesheets().clear(); // Clear existing styles
-        primaryStage.getScene().getStylesheets().add(cssPath);
     }
 
     /**
@@ -245,18 +240,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add(
                 getClass().getResource(themePath).toExternalForm());
-    }
-
-    /**
-     * Switches the current theme to the specified theme.
-     */
-    public void handleSwitchTheme(String themeName) {
-        currentTheme = themeName.toLowerCase();
-        applyTheme(currentTheme);
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**

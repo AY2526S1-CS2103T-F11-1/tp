@@ -109,7 +109,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_SMOKING_RECORD).isPresent()) {
             editPersonDescriptor.setSmokingRecord(ParserUtil.parseSmokingRecord(
-                    argMultimap.getValue(PREFIX_SMOKING_RECORD).get()));
+                    argMultimap.getValueOrResetIfEmpty(PREFIX_SMOKING_RECORD).get()));
         }
         if (argMultimap.getValue(PREFIX_BLOOD_TYPE).isPresent()) {
             editPersonDescriptor.setBloodType(ParserUtil.parseBloodType(
@@ -121,11 +121,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).isPresent()) {
             editPersonDescriptor.setPastMedicalHistory(ParserUtil.parsePastMedicalHistory(
-                    argMultimap.getValue(PREFIX_PAST_MEDICAL_HISTORY).get()));
+                    argMultimap.getValueOrResetIfEmpty(PREFIX_PAST_MEDICAL_HISTORY).get()));
         }
         if (argMultimap.getValue(PREFIX_ALCOHOLIC_RECORD).isPresent()) {
             editPersonDescriptor.setAlcoholicRecord(ParserUtil.parseAlcoholicRecord(
-                    argMultimap.getValue(PREFIX_ALCOHOLIC_RECORD).get()));
+                    argMultimap.getValueOrResetIfEmpty(PREFIX_ALCOHOLIC_RECORD).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

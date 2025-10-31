@@ -44,6 +44,17 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns Optional.of("None") if the last value for {@code prefix} is empty,
+     * else returns the last value of {@code prefix}.
+     */
+    public Optional<String> getValueOrResetIfEmpty(Prefix prefix) {
+        String defaultValue = "None"; // Reset value
+        Optional<String> valueOpt = getValue(prefix);
+        return valueOpt.get().isEmpty() ? Optional.of(defaultValue) : valueOpt;
+    }
+
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.

@@ -26,10 +26,12 @@ public class Index {
     }
 
     public int getZeroBased() {
+        assert zeroBasedIndex >= 0 : "Index cannot be negative";
         return zeroBasedIndex;
     }
 
     public int getOneBased() {
+        assert zeroBasedIndex >= 0 : "Index cannot be negative";
         return zeroBasedIndex + 1;
     }
 

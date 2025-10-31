@@ -41,7 +41,7 @@ public class SampleDataUtil {
                 new EmergencyContact("[Mother] +60 1296739024"),
                 getTagSet("colleagues", "friends"), new DateOfBirth("02-02-1999"), new BloodType("AB"),
                 new AlcoholicRecord("Occasional"), new Gender("F"), new SmokingRecord("Non-smoker"),
-                getAllergySet("nuts"), new PastMedicalHistory(""), getMedicineSet("antidepressents")),
+                getAllergySet("nuts"), new PastMedicalHistory("None"), getMedicineSet("antidepressents")),
             new Person(new Name("Charlotte Oliveiro"), new IdentityNumber("CO6969"), new Phone("93210283"),
                 new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 new EmergencyContact("[Father] 47592832"),
@@ -59,13 +59,13 @@ public class SampleDataUtil {
                 new EmergencyContact("[Another person] +429-482-3834"),
                 getTagSet("classmates"), new DateOfBirth("05-05-2002"), new BloodType("AB"),
                 new AlcoholicRecord("Former drinker"), new Gender("M"), new SmokingRecord("Occasional smoker"),
-                getAllergySet("nuts"), new PastMedicalHistory(""), getMedicineSet("antidepressents")),
+                getAllergySet("nuts"), new PastMedicalHistory("None"), getMedicineSet("antidepressents")),
             new Person(new Name("Roy Balakrishnan"), new IdentityNumber("RB6767"),
                 new Phone("92624417"), new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
                 new EmergencyContact("[Another person] +429-482-3834"),
                 getTagSet("colleagues"), new DateOfBirth("06-06-2003"), new BloodType("AB"),
                 new AlcoholicRecord("Yes"), new Gender("M"), new SmokingRecord("Non-smoker"),
-                getAllergySet("nuts"), new PastMedicalHistory(""), getMedicineSet("antidepressents"))
+                getAllergySet("nuts"), new PastMedicalHistory("None"), getMedicineSet("antidepressents"))
         };
     }
 

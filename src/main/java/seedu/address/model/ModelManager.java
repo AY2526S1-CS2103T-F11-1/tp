@@ -138,12 +138,13 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        Predicate<Appointment> personAppointmentPredicate = a -> a.getPatientId().equals(target.getIdentityNumber()); //
+        Predicate<Appointment> personAppointmentPredicate =
+                a -> a.getPatientId().equals(target.getIdentityNumber());
         List<Appointment> toRemove = this.addressBook.getAppointmentList().stream()
                 .filter(personAppointmentPredicate)
                 .toList();
         toRemove.forEach(addressBook::removeAppointment);
-        logger.fine("Removed appointments associated with deleted person: " + target.getName()); //
+        logger.fine("Removed appointments associated with deleted person: " + target.getName());
     }
 
     @Override

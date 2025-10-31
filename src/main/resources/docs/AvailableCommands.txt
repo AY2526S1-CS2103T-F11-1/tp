@@ -21,9 +21,10 @@ exit
 
 General Notes:
 INDEX must be a positive integer.
-Arguments can be inputted in any order (e.g. 'n\STEVEN g\F' is the same as 'g\F n\STEVEN')
+Arguments can be inputted in any order (e.g. 'n\STEVEN g\F' is the same as 'g\F n\STEVEN').
+In the given formats, fields surrounded with square brackets [] indicate an optional field.
 
-Refer to the full User Guide for more details:
+Refer to the User Guide for full details:
 → https://ay2526s1-cs2103t-f11-1.github.io/tp/UserGuide.html
 
 =========================
@@ -39,7 +40,7 @@ Patient Fields:
   [Must Contain]
     n\NAME
     id\IDENTITY_NUMBER
-    dob\DATE_OF_BIRTH (e.g., 02-02-2000)
+    dob\DATE_OF_BIRTH (e.g. 02-02-2000)
     p\PHONE_NUMBER
     e\EMAIL
     addr\HOME_ADDRESS
@@ -49,7 +50,7 @@ Patient Fields:
 
   [Optional - Single Entry]
     ar\ALCOHOLIC_RECORD
-    sr\SMOKING_RECORD (e.g., YES or NO)
+    sr\SMOKING_RECORD
     pmh\PAST_MEDICAL_HISTORY
 
   [Optional - Can have multiple]
@@ -57,7 +58,7 @@ Patient Fields:
     al\ALLERGY
     m\MEDICINE
 
-Example: add n\Betsy Crowe id\BC67 dob\02-02-2000 p\+65 12345678 e\betsycrowe@example.com addr\67 Yishun Street ec\[mother] +60 12-123-4567 b\AB g\Female ar\NO sr\NO pmh\None t\Yishun t\HighPriority al\Pollen al\Nuts m\Amlodepine m\Bisoprolol
+Example: add n\Betsy Crowe id\BC67 dob\02-02-2000 p\+65 12345678 e\betsycrowe@example.com addr\67 Yishun Street ec\[mother] +60 12-123-4567 b\AB g\Female ar\Severe alcoholic sr\3 packs a week pmh\Diagnosed with type 2 diabetes t\High Priority al\Pollen al\Nuts m\Amlodipine m\Bisoprolol
 
 
 ---
@@ -65,22 +66,19 @@ Edit a patient: edit
 -------------------------
 Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values. At least one input value must be included.
 
-Format:
-  edit INDEX [n\NAME] [id\IDENTITY_NUMBER] [dob\DATE_OF_BIRTH] [p\PHONE_NUMBER] [e\EMAIL] [addr\HOME_ADDRESS] [ec\EMERGENCY_CONTACT] [b\BLOOD_TYPE] [g\GENDER] [ar\ALCOHOLIC_RECORD] [sr\SMOKING_RECORD] [pmh\PAST_MEDICAL_HISTORY] [t\TAG] [al\ALLERGY] [m\MEDICINE]
-
-Patient Fields:
+Fields:
   [Optional - Single Entry]
     n\NAME
     id\IDENTITY_NUMBER
-    dob\DATE_OF_BIRTH (e.g., 02-02-2000)
+    dob\DATE_OF_BIRTH (e.g. 02-02-2000)
     p\PHONE_NUMBER
     e\EMAIL
     addr\HOME_ADDRESS
-    ec\EMERGENCY_CONTACT (e.g., [mother] +60 12-123-4567)
+    ec\EMERGENCY_CONTACT (e.g. [mother] +60 12-123-4567)
     b\BLOOD_TYPE
     g\GENDER
     ar\ALCOHOLIC_RECORD
-    sr\SMOKING_RECORD (e.g., YES or NO)
+    sr\SMOKING_RECORD
     pmh\PAST_MEDICAL_HISTORY
 
   [Optional - Can have multiple]
@@ -107,7 +105,7 @@ Example:
 ---
 View a patient: view
 -------------------------
-Displays the full medical information of the patient at the specified index.
+Displays the full information of the patient at the specified index.
 
 Format:
   view INDEX
@@ -125,13 +123,13 @@ Shows a list of all patients in the patient record.
 ---
 Find patients by name: find
 -------------------------
-Finds patients whose names contain any of the given keywords.
+Finds patients whose names or identity number contain any of the given keywords.
 
 Format:
   find KEYWORD [MORE_KEYWORDS]
 
 Example:
-  find Alex Bernice
+  find Alex Bernice A34
 
 
 ---
@@ -157,7 +155,7 @@ Format:
 
 Appointment Fields:
   [Must Contain]
-    adt\APPOINTMENT_TIME (e.g 13-10-2025 10:00)
+    adt\APPOINTMENT_TIME (e.g. 13-10-2025 10:00)
 
   [Optional - Single Entry]
     note\APPOINTMENT_NOTE
@@ -194,6 +192,7 @@ Example:
    GENERAL COMMANDS
 =========================
 
+
 ---
 Change theme: theme
 -------------------------
@@ -202,7 +201,7 @@ Changes theme of the app.
 Format:
   theme COLOUR
 
-Supported COLOUR:
+Supported COLOURs:
   dark, light, blue, pink
 
 Example:
