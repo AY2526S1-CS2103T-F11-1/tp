@@ -376,14 +376,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HealthNote` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete a patient**
+#### **Use case: UC01 - Delete a patient**
 
 **MSS**
 
-1.  User requests to <u>list patients (UC05)</u>
-2.  HealthNote shows a list of patients
-3.  User requests to delete a specific patient in the list
-4.  HealthNote deletes the patient
+1.  Actor requests to [<u>list patients (UC05)</u>](#use-case-uc05---list-patients).
+2.  System shows a list of patients.
+3.  Actor requests to delete a specific patient in the list.
+4.  System deletes the patient.
 
     Use case ends.
 
@@ -395,16 +395,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. HealthNote shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC02 - Add a patient**
+#### **Use case: UC02 - Add a patient**
 
 **MSS**
 
-1.  User requests to add a patient using the add command with required parameters.
-2.  HealthNote adds the patient to the system.
+1.  Actor requests to add a patient with required parameters.
+2.  System adds the patient to the system.
+3.  System shows a confirmation message including the details of the added patient.
+4.  System updates the displayed patient list.
+5.  Actor views the added patient in the patient list.
 
     Use case ends.
 
@@ -412,49 +415,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. One or more required parameters are missing.
 
-    * 1a1. HealthNote shows an error message.
+    * 1a1. System shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. Input parameters are in invalid formats (e.g. date, email, gender).
 
-    * 1b1. HealthNote shows an error message.
+    * 1b1. System shows an error message.
 
       Use case resumes at step 1.
 
 * 1c. Duplicate identity number detected.
 
-    * 1c1. HealthNote shows an error message.
+    * 1c1. System shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: UC03 - View all commands**
+#### **Use case: UC03 - View all commands**
 
 **MSS**
 
-1.  User types a command to view all available commands
-2.  HealthNote retrieves the list of commands supported
-3.  The list of commands is displayed to the user
-4.  User closes the list
+1.  Actor types a command to view all available commands.
+2.  System retrieves the list of commands supported.
+3.  System displays a seperated window containing the list of commands and their format.
+4.  Actor closes the window.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list of commands cannot be retrieved due to some error
+* 2a. The list of commands cannot be retrieved due to some error.
 
-    * 2a1. HealthNote shows an error message.
+    * 2a1. System shows an error message.
 
-      Use case ends
+      Use case ends.
 
-**Use case: UC04 - Edit a patient**
+#### **Use case: UC04 - Edit a patient**
 
 **MSS**
 
-1.  User requests to <u>list patients (UC05)</u>
-2.  HealthNote shows a list of patients
-3.  User requests to edit a patient using the edit command with required parameters.
-4.  HealthNote edits the patient in the system.
+1.  Actor requests to [<u>list patients (UC05)</u>](#use-case-uc05---list-patients).
+2.  System shows a list of patients.
+3.  Actor requests to edit a patient with required parameters.
+4.  System edits the patient in the system.
 
     Use case ends.
 
@@ -466,37 +469,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. One or more required parameters are missing.
 
-    * 1a1. HealthNote shows an error message.
+    * 3a1. System shows an error message.
 
-      Use case resumes at step 1
+      Use case resumes at step 2.
 
 * 3b. The given index is invalid.
 
-    * 1bHealthNote shows an error message.
+    * 3b1. System shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
 * 3c. Duplicate identity number detected.
 
-    * 3c1. HealthNote shows an error message.
+    * 3c1. System shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
-**Use case: UC05 - List patients**
+#### **Use case: UC05 - List patients**
 
 **MSS**
 
 1.  User requests to list all patients.
-2.  HealthNote lists the patients in the system.
+2.  System lists all the patients.
 
     Use case ends.
 
-**Use case: UC06 - Find patients**
+#### **Use case: UC06 - Find patients**
 
 **MSS**
 
-1.  User requests to find patients.
-2.  HealthNote lists the matching patients in the system.
+1.  User requests to find patients with required parameters.
+2.  System lists the matching patients in the system.
 
     Use case ends.
 
@@ -506,50 +509,128 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case ends.
 
-**Use case: UC07 - Clear all entries**
+* 1b. One or more required parameters are missing.
 
-**MSS**
-
-1.  User requests to clear all entries in the system.
-2.  HealthNote clears all entries in the system.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command inputted is invalid.
-
-    * 1a1. HealthNote shows an error message.
+    * 1b1. System shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: UC08 - Change theme**
+#### **Use case: UC07 - Clear all entries**
 
 **MSS**
 
-1.  User requests to change theme of the app.
-2.  HealthNote changes the theme of the app.
+1.  User requests to clear all entries.
+2.  System clears all entries.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The argument inputted is invalid.
+* 1a. The command entered is invalid.
 
-    * 1a1. HealthNote shows an error message.
+    * 1a1. System shows an error message.
 
-      Use case resumes at step 1
+      Use case resumes at step 1.
 
-**Use case: UC09 - Accessing help**
+#### **Use case: UC08 - Change theme**
 
 **MSS**
 
-1.  User requests for help to view available commands.
-2.  HealthNote displays the available commands.
+1.  Actor requests to change the theme with required argument.
+2.  System changes the theme.
 
     Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+* 1a. The argument entered is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+#### **Use case: UC09 - Schedule an appointment**
+
+**MSS**
+
+1.  Actor requests to schedule an appointment with required parameters.
+2.  System adds the appointment to the system.
+3.  System shows a confirmation message.
+4.  System updates the displayed upcoming appointment list.
+
+    Use case ends.
+
+**Extensions**
+* 1a. One or more required parameters are missing.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Input parameters are in invalid formats (e.g. date, time).
+
+    * 1b1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. Appointment time with the same patient clashes with an existing appointment.
+
+    * 1c1. System shows a warning message.
+
+      Use case resumes at step 1.
+
+#### **Use case: UC10 - Delete a past appointment**
+
+**MSS**
+
+1.  Actor requests to delete a past appointment with specified index.
+2.  System removes the corresponding appointment.
+3.  System shows a confirmation message.
+4.  System updates the displayed past appointment list.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The given index is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC11 - Delete an upcoming appointment**
+
+**MSS**
+
+1.  Actor requests to cancel an upcoming appointment with specified index.
+2.  System removes the corresponding appointment.
+3.  System shows a confirmation message.
+4.  System updates the displayed upcoming appointment list.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The given index is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC12 - Exit application**
+
+**MSS**
+
+1.  Actor requests to exit the application.
+2.  System saves all data and user preferences automatically.
+3.  System closes the application window.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Saving data or user preferences fails.
+  * 2a1. System shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
