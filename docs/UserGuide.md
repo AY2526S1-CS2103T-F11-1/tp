@@ -35,7 +35,7 @@ Hello indie doctors, welcome to our **HealthNote User Guide**!
     * [Editing a patient : `edit`](#editing-a-patient-edit)
     * [Deleting a patient : `delete`](#deleting-a-patient-delete)
   * [Feature - Viewing Patient Records](#feature-viewing-patient-records)
-    * [View a patient's medical information: `view`](#view-a-patients-medical-information-view)
+    * [View a patient's medical information: `view`](#view-a-patients-medical-information)
     * [Listing all patients : `list`](#listing-all-patients-list)
     * [Locating patients by name: `find`](#locating-patients-by-name-find)
   * [Features - Managing Appointment Records](#features-managing-appointment-records)
@@ -386,14 +386,35 @@ Examples:
 
 ## Feature - Viewing Patient Records
 
-### View a patient's medical information: `view`
+### View a patient's medical information:
 
-Displays the medical information of the patient at the specified INDEX
+Purpose: Displays the medical information of the patient at the specified `INDEX`.
+
+Command: `view`
+
+Usage: Type `view` followed by the index number of the patient whose medical information you want to see.
 
 Format: `view INDEX`
 
-Example: `view 1`
+<div markdown="block" class="alert alert-info">
 
+**ℹ️ Info:**<br>
+* Displays the patient at the specified `INDEX` on the view panel.
+* The index refers to the index number shown in the currently displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​ , and should not exceed the number of patients in the currently displayed list.
+</div>
+
+Example:
+- `list` followed by `view 1` displays the medical information of the 1st patient in the full patient list on the view panel.
+- `find Betsy` followed by `view 2` displays the medical information of the 2nd patient in the results of the `find` command on the view panel.
+
+**Here is a list of common errors and how to prevent them:**
+
+| Error Message                        | Reason                                                                                         | Solution                                                                                              |
+|--------------------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| Invalid command format!              | You did not specify an `INDEX` or the `INDEX` provided is not positive.                            | Enter a positive integer as `INDEX`.                                                                  |
+| Unknown command                      | The `view` command may have been misspelled or not entered in lowercase                      | Ensure that you use `view` exactly in lowercase.                                                      |
+| The person index provided is invalid | You have entered an `INDEX` that exceeds the number of patients in the currently displayed list. | Ensure that the entered `INDEX` not more than the number of patients in the currently displayed list. |
 
 ### Listing all patients : `list`
 
