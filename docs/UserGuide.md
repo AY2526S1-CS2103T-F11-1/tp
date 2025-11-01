@@ -36,7 +36,7 @@ Hello indie doctors, welcome to our **HealthNote User Guide**!
     * [Deleting a patient : `delete`](#deleting-a-patient-delete)
   * [Feature - Viewing Patient Records](#feature-viewing-patient-records)
     * [View a patient's medical information: `view`](#view-a-patients-medical-information-view)
-    * [Listing all patients : `list`](#listing-all-patients-list)
+    * [Listing all patients : `list`](#listing-all-patients)
     * [Locating patients by name: `find`](#locating-patients-by-name-find)
   * [Features - Managing Appointment Records](#features-managing-appointment-records)
     * [Scheduling an appointment: `schedule`](#scheduling-an-appointment-schedule-)
@@ -395,11 +395,36 @@ Format: `view INDEX`
 Example: `view 1`
 
 
-### Listing all patients : `list`
+### Listing all patients:
 
-Shows a list of all patients in the address book.
+Purpose: Shows a list of all patients stored in the patient list.
+
+Command: `list`
+
+Usage: Type `list` to display all patients.
 
 Format: `list`
+
+<div markdown="block" class="alert alert-info">
+
+**ℹ️ Info:**<br>
+
+* The list will be refreshed to show all patients when the `list` command is used.
+* Patients are displayed in the order they were added, with the most recently added patients appearing at the end of the list.
+</div>
+
+<box type="tip" seamless>
+
+**Tip:** You can use the `list` command to reset the patient list view after using the `find` command.
+</box>
+
+Examples:
+- `list` displays all patients in the patient list.<br>
+- `list 123` will displays same as `list` with the below warning message.<br>
+  `Note: Additional arguments detected. You may provide extra arguments, but they will be ignored.`
+
+[Back to Table of Contents](#table-of-contents)
+
 
 ### Locating patients by name: `find`
 
