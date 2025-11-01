@@ -469,36 +469,14 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Feature - Clearing Data
+
 ### Changing the colour theme : `theme`
 
 Changes the colour theme of the application.
 
 Format: `theme THEME_NAME`
 * Available themes: `light`, `dark`, `blue`, `pink`
-
-### Viewing help : `help`
-
-Displays a window showing all available commands and how to use them.
-
-Format: `help`
-
-* Opens a help window with a list of all commands and their usage.
-* No additional parameters are required.
-
-Examples:
-* `help` opens the help window displaying all available commands.
-
-**Here is a list of common errors and how to prevent them**
-
-| Error Message                                 | Reason                                                              | Solution                                                                  |
-|-----------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Unknown command                               | The `help` command may be misspelled or not entirely in lowercase   | Ensure that you use `help` exactly in lowercase.                          |
-| Invalid command format!                       | You might have added unnecessary parameters after `help`            | Enter `help` without any additional parameters.                           |
-
-[Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-## Feature - Clearing Data
 
 ### Clearing all entries : `clear`
 
