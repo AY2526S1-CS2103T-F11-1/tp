@@ -583,7 +583,9 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file 
+       
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -591,6 +593,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Manual testing of patient commands
 
 ### Adding a person
 
@@ -746,6 +750,60 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `find a1234567b` (lowercase)<br>
        Expected: List shows the person with identity number "A1234567B" if the search is case-insensitive for identity numbers.
 
+### Manual testing of appointment commands
+       
+### Scheduling appointments
+
+1. Scheduling appointment with all required fields
+
+    1. Prerequisites: Multiple persons is in the list.
+   
+    2. Test case: `schedule 1 adt\25-06-2025 13:00` <br>
+       Expected: New appointment added to the appointment list, containing the same Patient ID as the first patient in the patient list.
+
+    3. Test case: repeat the previous command `schedule 1 adt\25-06-2025 13:00` <br>
+       Expected: Error message indicates appointment already exists for the patient.
+
+    4. Test case: `schedule 1 adt\25-06-2025 13:000` <br>
+       Expected: Error message indicates incorrect appointment time format.
+
+    5. Test case: `schedule 0 adt\25-06-2025 13:00`
+       Expected: No appointment is scheduled. Error message indicates invalid command format.
+
+2. Scheduling appointment with optional fields
+
+    1. Prerequisites: Multiple persons is in the list.
+
+    2. Test case: `schedule 1 adt\25-06-2025 13:00 note\Need IV Drip` <br>
+       Expected: New appointment added to the appointment list, containing the same Patient ID as the first patient in the patient list, with the note "Needs IV Drip".
+
+
+### Deleting upcoming appointments
+
+1. Deleting upcoming appointments from the upcoming appointment list
+
+    1. Prerequisites: At least one upcoming appointment in the list.
+
+    2. Test case: `unschedule 1`
+       Expected: The first upcoming appointment is successfully deleted, and a confirmation message is shown.
+    
+    3. Test case: `unschedule 0`
+       Expected: No appointment deleted. Error message is shown indicating invalid format.
+
+### Deleting past appointments
+
+1. Deleting past appointments from the past appointment list
+
+    1. Prerequisites: At least one past appointment in the list.
+
+    2. Test case: `forget 1`
+       Expected: The first past appointment is successfully deleted, and a confirmation message is shown.
+
+    3. Test case: `forget 0`
+       Expected: No appointment deleted. Error message is shown indicating invalid format.
+
+### Manual testing of general commands
+
 ### Clearing all entries
 
 1. Clearing all data from the address book with confirmation
@@ -811,6 +869,9 @@ testers are expected to do more *exploratory* testing.
     3. Test case: Click on "Help" menu and select "Help F1"<br>
        Expected: Help window opens.
 
+    4. Test case: `help 12345`<br>
+       Expected: Help window opens.
+
 ### Exiting the application
 
 1. Exiting via command
@@ -828,13 +889,31 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Click the window close button (X)<br>
        Expected: Application closes gracefully. All data is automatically saved.
 
-### Saving data
+### Manual testing of data handling
 
-1. Dealing with missing/corrupted data files
+### Saving data issues
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with missing data files
 
-1. _{ more test cases …​ }_
+    Test case:
+
+    1. Go into the data folder which is in the same folder as the app's jar file. (The location is indicated in the bottom left corner of the application)
+    2. Delete the file named `addressbook.json`.
+    3. Relaunch the application. 
+   
+    Expected: A new file with sample patient records is created. Sample patient records are displayed in the application.
+
+2. Dealing with corrupted data files
+
+    Test case:
+
+    1. Go into the data folder which is in the same folder as the app's jar file. (The location is indicated in the bottom left corner of the application)
+    2. Open the file named `addressbook.json`.
+    3. Modify the file to simulate corruption. For instance, delete the first few lines from the file.
+    4. Relaunch the application. 
+   
+    Expected: The panel on the left is empty. No patient records are displayed in the application.
+
 
 ## Non-Functional Requirements
 
