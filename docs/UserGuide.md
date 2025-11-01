@@ -469,14 +469,36 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Feature - Clearing Data
-
 ### Changing the colour theme : `theme`
 
 Changes the colour theme of the application.
 
 Format: `theme THEME_NAME`
 * Available themes: `light`, `dark`, `blue`, `pink`
+
+### Exiting the program : `exit`
+
+Exits the HealthNote application.
+
+Format: `exit`
+
+* Closes the HealthNote application.
+* No additional parameters are required.
+* All data is automatically saved before exiting.
+
+Examples:
+* `exit` closes the HealthNote application.
+
+**Here is a list of common errors and how to prevent them**
+
+| Error Message                                 | Reason                                                              | Solution                                                                  |
+|-----------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Unknown command                               | The `exit` command may be misspelled or not entirely in lowercase   | Ensure that you use `exit` exactly in lowercase.                          |
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+## Feature - Clearing Data
 
 ### Clearing all entries : `clear`
 
