@@ -33,7 +33,7 @@ Hello indie doctors, welcome to our **HealthNote User Guide**!
   * [Features - Managing Patient Records](#features-managing-patient-records)
     * [Adding a patient: `add`](#adding-a-patient-add)
     * [Editing a patient : `edit`](#editing-a-patient-edit)
-    * [Deleting a patient : `delete`](#deleting-a-patient-delete)
+    * [Deleting a patient : `delete`](#deleting-a-patient)
   * [Feature - Viewing Patient Records](#feature-viewing-patient-records)
     * [View a patient's medical information: `view`](#view-a-patients-medical-information-view)
     * [Listing all patients : `list`](#listing-all-patients-list)
@@ -357,27 +357,35 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting a patient : `delete`
+### Deleting a patient:
 
-Deletes the specified patient from the address book.
+Purpose: Removes the specified patient from the patient list.
+
+Command: `delete`
+
+Usage: Type `delete` followed by the index number of the patient to be removed.
 
 Format: `delete INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**ℹ️ Info:**<br>
 * Deletes the patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the currently displayed patient list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ , and should not exceed the number of patients in the currently displayed list.
+</div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in the full patient list.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 **Here is a list of common errors and how to prevent them**
 
-| Error Message                                 | Reason                                                              | Solution                                                                  |
-|-----------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Invalid command format!                       | You might not have entered a positive INDEX.                        | Enter a positive INDEX.                                                   |
-| Unknown command                               | The `delete` command may be misspelled or not entirely in lowercase | Ensure that you use `delete` exactly in lowercase.                        |
-|      The person index provided is invalid                                         | You have entered an invalid index                                   | Ensure that the index not more than the number of patients in HealthNote. |
+| Error Message                        | Reason                                                                                         | Solution                                                                                     |
+|--------------------------------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| Invalid command format!              | You did not specify an `INDEX` or the `INDEX` provided is not positive.                        | Enter a positive integer as `INDEX`.                                                           |
+| Unknown command                      | The `delete` command may have been misspelled or not entered in lowercase.                     | Ensure that you use `delete` exactly in lowercase.                                           |
+| The person index provided is invalid | You have entered an `INDEX` that exceeds the number of patients in the currently displayed list. | Ensure that the `INDEX` not more than the number of patients in the currently displayed list. |
 
 
 [Back to Table of Contents](#table-of-contents)
