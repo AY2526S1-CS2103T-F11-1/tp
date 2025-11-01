@@ -126,7 +126,7 @@ Here are the key components of the HealthNote User Interface (UI), designed for 
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui-Updated.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -211,7 +211,7 @@ Here are the key components of the HealthNote User Interface (UI), designed for 
 
 Displays the help window or brings the help window to the front if it is already opened.
 
-![help message](images/HelpWindow.png)
+![help message](images/HelpWindow-Updated.png)
 
 Format: `help`
 
@@ -262,11 +262,13 @@ Format: `add n\NAME id\IDENTITY_NUMBER p\PHONE e\EMAIL addr\ADDRESS ec\EMERGENCY
 | **al\ALLERGY**               | No              | Yes                    | List of known allergies (e.g., “Peanuts”, “Penicillin”).                            |
 | **m\MEDICINE**               | No              | Yes                    | List of current medications prescribed to the patient.                              |
 
+<div markdown="block" class="alert alert-info">
 
-<box type="tip" seamless>
+**ℹ️ Info:**<br>
+* When adding patients without using the optional fields `Alcoholic Record`, `Smoking Record` and `Past Medical Diagnoses`, they will have default values "None" for these fields . 
+* You can enter any number of tags, allergies, medicines (including 0).
+</div>
 
-**Tip:** You can enter any number of tags, allergies, medicines (including 0).
-</box>
 <box type="tip" seamless>
 
 **Tip:** The fields can be entered in any order.
@@ -415,7 +417,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavid-Updated.png)
 
 [Back to Table of Contents](#table-of-contents)
 
