@@ -37,7 +37,7 @@ Hello indie doctors, welcome to our **HealthNote User Guide**!
   * [Feature - Viewing Patient Records](#feature-viewing-patient-records)
     * [View a patient's medical information: `view`](#view-a-patients-medical-information-view)
     * [Listing all patients : `list`](#listing-all-patients-list)
-    * [Locating patients by name: `find`](#locating-patients-by-name-find)
+    * [Locating patients by name: `find`](#locating-patients-by-name-or-identity)
   * [Features - Managing Appointment Records](#features-managing-appointment-records)
     * [Scheduling an appointment: `schedule`](#scheduling-an-appointment-schedule-)
     * [Deleting upcoming appointment: `unschedule`](#deleting-upcoming-appointment-unschedule)
@@ -401,23 +401,46 @@ Shows a list of all patients in the address book.
 
 Format: `list`
 
-### Locating patients by name: `find`
+### Locating patients by name or identity:
 
-Finds patients whose names contain any of the given keywords.
+Purpose: Search for patients in the patient list by name or identity number.
+
+Command: `find`
+
+Usage: Type `find` followed by at least one keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<div markdown="block" class="alert alert-info">
+
+**ℹ️ Matching criteria:**<br>
+* **Case-insensitive** for both name and identity. <br>
+  Example: `hans` matches `Hans`, `a1234567X` matches `A1234567x`
+* **Name**. matches if any of the keywords is part of the patient's name.<br>
+  Example: keyword `Hans` matches patient with name `Hans Andersen` and `Joanne Hans`, but not `JHans Doe`
+* **Identity** matches if any of the keywords matches exactly the patient's identity.<br>
+  Example: keyword `S1234567A` matches patient with identity `s1234567a` but not `S12345678A`
+* **Inclusive search**: <br>
+  A patient is listed if any of the keywords match either the patient's name or identity.
+</div>
+
+<box type="tip" seamless>
+
+**Tip:** The fields can be entered in any order. <br>
+  e.g. `find John Alex` returns the same results as `find Alex John`<br>
+</box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavid-Updated.png)
+
+**Here is a list of common errors and how to prevent them**
+
+| Error Message                                 | Reason                                                            | Solution                                         |
+|-----------------------------------------------|-------------------------------------------------------------------|--------------------------------------------------|
+| Invalid command format!                       | Does not provide any keyword.                                     | Add at least one keyword, e.g. `John`.           |
+| Unknown command                               | The `find` command may be misspelled or not entirely in lowercase | Ensure that you use `find` exactly in lowercase. |
 
 [Back to Table of Contents](#table-of-contents)
 
