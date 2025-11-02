@@ -469,14 +469,36 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Feature - Clearing Data
+## Feature - General Features
 
 ### Changing the colour theme : `theme`
 
 Changes the colour theme of the application.
+Changes the colour theme of HealthNote.
 
 Format: `theme THEME_NAME`
 * Available themes: `light`, `dark`, `blue`, `pink`
+
+* Available themes: `light`, `dark`, `blue`, `pink`.
+* The theme name **must be exactly one of the available options**.
+* Theme names are non-case-sensitive, both lowercase and uppercase letters are accepted.
+
+Examples:
+* `theme dark` changes the application to dark mode.
+* `theme pink` changes the application to pink mode.
+
+**Here is a list of common errors and how to prevent them**
+
+| Error Message      | Reason                                                             | Solution                                                               |
+|--------------------|--------------------------------------------------------------------|------------------------------------------------------------------------|
+| Unknown command    | The `theme` command may be misspelled or not entirely in lowercase | Ensure that you use `theme` exactly in lowercase.                      |
+| Unknown theme      | The theme name entered is not available                            | Enter one of the available themes: `light`, `dark`, `blue`, or `pink`. |
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Feature - Clearing Data
 
 ### Clearing all entries : `clear`
 
