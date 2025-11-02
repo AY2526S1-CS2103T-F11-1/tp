@@ -53,6 +53,11 @@
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
+        "appendix-effort": "Appendix: Effort",
+        "difficulty-level": "Difficulty Level",
+        "challenges-faced": "Challenges Faced",
+        "effort-required": "Effort Required",
+        "achievements": "Achievements",
         "appendix-planned-enhancements": "Appendix: Planned Enhancements",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -75,9 +80,8 @@
         "changing-theme": "Changing theme",
         "getting-help": "Getting help",
         "exiting-the-application": "Exiting the application",
-        "saving-data": "Saving data",
-        "non-functional-requirements-2": "Non-Functional Requirements",
-        "glossary-2": "Glossary"
+        "manual-testing-of-data-handling": "Manual testing of data handling",
+        "saving-data-issues": "Saving data issues"
       },
       "headingKeywords": {}
     },
