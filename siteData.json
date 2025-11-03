@@ -38,6 +38,7 @@
     },
     {
       "src": "DeveloperGuide.md",
+      "title": "Developer Guide",
       "headings": {
         "healthnote-developer-guide": "HealthNote Developer Guide",
         "acknowledgements": "Acknowledgements",
