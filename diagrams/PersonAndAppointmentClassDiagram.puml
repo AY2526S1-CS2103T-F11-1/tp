@@ -40,5 +40,15 @@ Person -down-> "1" PastMedicalHistory
 Person -down-> "1" Phone
 Person -down-> "1" SmokingRecord
 Person -up-> "1" IdentityNumber
+
+Class Appointment #806600
+Class AppointmentDateTime
+Class AppointmentNotes
+
+
+Appointment -down-> "1" IdentityNumber
+
+Appointment -left-> "1" AppointmentDateTime
+Appointment -right-> "1" AppointmentNotes
 }
 @enduml
